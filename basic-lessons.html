@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Lessons | Abid Rafiq Quran Academy</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- GoogleFonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&family=Cairo:wght@400;600;700&family=Tajawal:wght@300;400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- OurStyles -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --color-primary: #ba992e;
+            --color-secondary: #06312a;
+        }
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Tajawal', sans-serif;
+        }
+        .navbar {
+            background-color: white !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .gallery-container, .viewer-container {
+            max-width: 900px;
+            margin: 20px auto;
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .gallery-img-wrapper, .dua-wrapper {
+            position: relative;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-img {
+            max-width: 100%;
+            max-height: 80vh;
+            height: auto;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .btn-custom {
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-width: 140px;
+        }
+        .btn-custom:hover {
+            background-color: #a08328;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(186, 153, 46, 0.4);
+        }
+        .btn-custom:disabled {
+            background-color: #ccc;
+            transform: none;
+            box-shadow: none;
+        }
+        .nav-tabs {
+            border-bottom: none;
+            gap: 10px;
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            color: #666;
+            font-weight: 700;
+            padding: 15px 25px;
+            border-radius: 10px;
+            background: #eee;
+            transition: 0.3s;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: var(--color-primary) !important;
+            color: white !important;
+        }
+        .content-section {
+            padding: 20px 0;
+        }
+        .lang-control {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-flex;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .lang-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        .dua-content, .nimaz-content {
+            direction: rtl;
+            text-align: right;
+        }
+        .dua-card, .nimaz-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-right: 5px solid var(--color-primary);
+        }
+        .text-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: var(--color-secondary);
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-align: center;
+        }
+        .text-translation {
+            font-size: 1.4rem;
+            color: #555;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        .step-title {
+            color: var(--color-primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        [dir="ltr"] .dua-content, [dir="ltr"] .nimaz-content {
+            text-align: left;
+        }
+        .back-home {
+            text-decoration: none;
+            color: var(--color-secondary);
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .counter-badge {
+            background: var(--color-secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .navbar-lang-switcher {
+            display: flex;
+            gap: 5px;
+        }
+        @media (max-width: 768px) {
+            .nav-tabs .nav-link {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+            .text-arabic {
+                font-size: 1.6rem;
+            }
+            .text-translation {
+                font-size: 1.1rem;
+            }
+            .btn-custom {
+                padding: 10px 20px;
+                min-width: 100px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg py-3">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img src="img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+          <span class="d-none d-sm-inline" style="color: var(--color-secondary); font-weight: bold;">Abid Rafiq Academy</span>
+        </a>
+
+        <div class="d-flex align-items-center gap-3">
+            <div class="navbar-lang-switcher">
+                <button class="lang-btn" onclick="setPageLanguage('ar')">AR</button>
+                <button class="lang-btn" onclick="setPageLanguage('ur')">UR</button>
+                <button class="lang-btn" onclick="setPageLanguage('en')">EN</button>
+            </div>
+            <a href="index.html" class="back-home" id="btn-back">
+                <i class="fa fa-home"></i> <span id="back-text">BACK TO HOME</span>
+            </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-5" id="main-title" style="color: var(--color-secondary); font-weight: 800;">Basic Islamic Lessons</h1>
+
+        <ul class="nav nav-tabs justify-content-center mb-4" id="lessonTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="qaida-tab" data-bs-toggle="tab" data-bs-target="#qaida" type="button" role="tab">NOORANI QAEEDHA</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="dua-tab" data-bs-toggle="tab" data-bs-target="#dua" type="button" role="tab">DUA MASNOON 50</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="nimaz-tab" data-bs-toggle="tab" data-bs-target="#nimaz" type="button" role="tab">NIMAZ COMPLETE</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="lessonTabsContent">
+            <!-- Noorani Qaida Tab -->
+            <div class="tab-pane fade show active" id="qaida" role="tabpanel">
+                <div class="gallery-container">
+                    <h2 class="mb-4" id="qaida-title" style="color: var(--color-secondary);">Noorani Qaida Viewer</h2>
+                    <div class="gallery-img-wrapper">
+                        <img id="qaida-img" src="NOORAI QEEDHA/noorani_qaida_page-0001.jpg" alt="Noorani Qaida Page" class="gallery-img">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center px-md-5">
+                        <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida">
+                            Previous
+                        </button>
+                        <span id="page-info" class="fw-bold fs-4">Page 1 / 31</span>
+                        <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Dua Masnoon Tab -->
+            <div class="tab-pane fade" id="dua" role="tabpanel">
+                <div class="content-section text-center">
+                    <div class="lang-control">
+                        <button class="lang-btn" data-lang="ar" onclick="setDuaLang('ar', this)">العربية</button>
+                        <button class="lang-btn active" data-lang="ur" onclick="setDuaLang('ur', this)">اردو</button>
+                        <button class="lang-btn" data-lang="en" onclick="setDuaLang('en', this)">English</button>
+                    </div>
+
+                    <div class="viewer-container">
+                        <div class="counter-badge" id="dua-counter">Dua 1 / 50</div>
+                        <div class="dua-wrapper" id="dua-display">
+                            <!-- Dua content injected here -->
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center px-md-5">
+                            <button class="btn btn-custom" onclick="prevDua()" id="btn-prev-dua">
+                                <i class="fa fa-chevron-right"></i> Previous
+                            </button>
+                            <button class="btn btn-custom" onclick="nextDua()" id="btn-next-dua">
+                                Next <i class="fa fa-chevron-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nimaz Tab -->
+            <div class="tab-pane fade" id="nimaz" role="tabpanel">
+                <div class="content-section text-center">
+                    <div class="lang-control">
+                        <button class="lang-btn" data-lang="ar" onclick="setNimazLang('ar', this)">العربية</button>
+                        <button class="lang-btn active" data-lang="ur" onclick="setNimazLang('ur', this)">اردو</button>
+                        <button class="lang-btn" data-lang="en" onclick="setNimazLang('en', this)">English</button>
+                    </div>
+                    <div id="nimaz-container" class="nimaz-content container">
+                        <!-- Nimaz steps loaded by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+      <div class="container">
+        <p class="copy-right">
+            All rights reserved &copy; <span class="logo">Abid Rafiq Academy for the Quran</span>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+        // --- Shared Logic ---
+        const pageTranslations = {
+            ar: {
+                title: "الدروس الإسلامية الأساسية",
+                back: "العودة للرئيسية",
+                qaidaTab: "القاعدة النورانية",
+                duaTab: "50 دعاء مسنون",
+                nimazTab: "تعليم الصلاة",
+                qaidaTitle: "مشاهدة القاعدة النورانية",
+                page: "صفحة",
+                prev: "السابق",
+                next: "التالي",
+                dir: "rtl"
+            },
+            ur: {
+                title: "بنیادی اسلامی اسباق",
+                back: "ہوم پیج پر واپس جائیں",
+                qaidaTab: "نورانی قاعدہ",
+                duaTab: "50 مسنون دعائیں",
+                nimazTab: "مکمل نماز",
+                qaidaTitle: "نورانی قاعدہ ویور",
+                page: "صفحہ",
+                prev: "پچھلا",
+                next: "اگلا",
+                dir: "rtl"
+            },
+            en: {
+                title: "Basic Islamic Lessons",
+                back: "BACK TO HOME",
+                qaidaTab: "NOORANI QAEEDHA",
+                duaTab: "50 MASNOON DUAS",
+                nimazTab: "NIMAZ COMPLETE",
+                qaidaTitle: "Noorani Qaida Viewer",
+                page: "Page",
+                prev: "Previous",
+                next: "Next",
+                dir: "ltr"
+            }
+        };
+
+        let currentLang = 'ur';
+
+        function setPageLanguage(lang) {
+            currentLang = lang;
+            const data = pageTranslations[lang];
+            if (!data) return;
+
+            document.documentElement.setAttribute('lang', lang);
+            document.documentElement.setAttribute('dir', data.dir);
+
+            document.getElementById('main-title').innerText = data.title;
+            document.getElementById('back-text').innerText = data.back;
+            document.getElementById('qaida-tab').innerText = data.qaidaTab;
+            document.getElementById('dua-tab').innerText = data.duaTab;
+            document.getElementById('nimaz-tab').innerText = data.nimazTab;
+            document.getElementById('qaida-title').innerText = data.qaidaTitle;
+
+            // Footer translation
+            const footerText = lang === 'ar' ? 'جميع الحقوق محفوظة © أكاديمية عابد رفيق للقرآن' :
+                               (lang === 'ur' ? 'جملہ حقوق محفوظ ہیں © عابد رفیق قرآن اکیڈمی' :
+                               'All rights reserved &copy; Abid Rafiq Academy for the Quran');
+            document.querySelector('.copy-right').innerHTML = footerText;
+
+            document.querySelectorAll('.navbar-lang-switcher .lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.trim().toLowerCase() === lang);
+            });
+
+            // Update sub-tabs language
+            const duaLangBtn = document.querySelector(`#dua .lang-btn[data-lang="${lang}"]`);
+            if(duaLangBtn) setDuaLang(lang, duaLangBtn);
+
+            const nimazLangBtn = document.querySelector(`#nimaz .lang-btn[data-lang="${lang}"]`);
+            if(nimazLangBtn) setNimazLang(lang, nimazLangBtn);
+
+            updateGallery(false);
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        function updateNavButtons(lang, type) {
+            const prevBtn = document.getElementById(`btn-prev-${type}`);
+            const nextBtn = document.getElementById(`btn-next-${type}`);
+            if(prevBtn && nextBtn) {
+                const data = pageTranslations[lang];
+                if(lang === 'en') {
+                    prevBtn.innerHTML = `<i class="fa fa-chevron-left"></i> ${data.prev}`;
+                    nextBtn.innerHTML = `${data.next} <i class="fa fa-chevron-right"></i>`;
+                } else {
+                    prevBtn.innerHTML = `${data.prev} <i class="fa fa-chevron-right"></i>`;
+                    nextBtn.innerHTML = `<i class="fa fa-chevron-left"></i> ${data.next}`;
+                }
+            }
+        }
+
+        // --- Noorani Qaida Logic ---
+        let currentPage = 1;
+        const totalPages = 31;
+        const imgElement = document.getElementById('qaida-img');
+        const pageInfo = document.getElementById('page-info');
+
+        function updateGallery(scroll = true) {
+            const pageNum = String(currentPage).padStart(4, '0');
+            imgElement.src = `NOORAI QEEDHA/noorani_qaida_page-${pageNum}.jpg`;
+            const data = pageTranslations[currentLang];
+            pageInfo.innerText = `${data.page} ${currentPage} / ${totalPages}`;
+            updateNavButtons(currentLang, 'qaida');
+            if(scroll) document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function nextPage() { if (currentPage < totalPages) { currentPage++; updateGallery(); } }
+        function prevPage() { if (currentPage > 1) { currentPage--; updateGallery(); } }
+
+        // --- Dua Logic ---
+        let currentDuaIndex = 0;
+        let currentDuaLang = 'ur';
+
+        const duas = [
+            { title: {en: "After waking up", ur: "صبح بیدار ہونے کی دعا", ar: "دعاء الاستيقاظ"}, ar: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ", ur: "تمام تعریفیں اللہ کے لیے ہیں جس نے ہمیں مارنے کے بعد زندہ کیا اور اسی کی طرف لوٹ کر جانا ہے۔", en: "All praise be to Allah who gave us life after death and to Him is the return." },
+            { title: {en: "Before sleeping", ur: "سونے سے پہلے کی دعا", ar: "دعاء النوم"}, ar: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا", ur: "اے اللہ! میں تیرے ہی نام کے ساتھ مرتا (سوتا) ہوں اور جیتا (جاگتا) ہوں۔", en: "O Allah, in Your name I die and I live." },
+            { title: {en: "Before eating", ur: "کھانا شروع کرنے کی دعا", ar: "دعاء قبل الطعام"}, ar: "بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ", ur: "اللہ کے نام سے اور اللہ کی برکت پر۔", en: "In the name of Allah and with the blessings of Allah." },
+            { title: {en: "After eating", ur: "کھانے کے بعد کی دعا", ar: "دعاء بعد الطعام"}, ar: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ", ur: "تمام تعریفیں اللہ کے لیے ہیں جس نے ہمیں کھلایا اور پلایا اور ہمیں مسلمان بنایا۔", en: "All praise be to Allah who has fed us and given us drink and made us Muslims." },
+            { title: {en: "Before entering toilet", ur: "بیت الخلا میں داخل ہونے کی دعا", ar: "دعاء دخول الخلاء"}, ar: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ", ur: "اے اللہ! میں ناپاک جنوں اور جننیوں سے تیری پناہ مانگتا ہوں۔", en: "O Allah, I seek refuge in You from the male and female evil spirits." },
+            { title: {en: "After leaving toilet", ur: "بیت الخلا سے نکلنے کی دعا", ar: "دعاء الخروج من الخلاء"}, ar: "غُفْرَانَكَ ، الْحَمْدُ لِلَّهِ الَّذِي أَذْهَبَ عَنِّي الْأَذَى وَعَافَانِي", ur: "اے اللہ! میں تجھ سے بخشش مانگتا ہوں۔ تمام تعریفیں اللہ کے لیے ہیں جس نے مجھ سے تکلیف دور کی اور مجھے عافیت دی۔", en: "I seek Your forgiveness. All praise be to Allah who removed from me discomfort and gave me relief." },
+            { title: {en: "Before Wudu", ur: "وضو سے پہلے کی دعا", ar: "دعاء قبل الوضوء"}, ar: "بِسْمِ اللَّهِ", ur: "اللہ کے نام سے (شروع کرتا ہوں)۔", en: "In the name of Allah." },
+            { title: {en: "After Wudu", ur: "وضو کے بعد کی دعا", ar: "دعاء بعد الوضوء"}, ar: "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", ur: "میں گواہی دیتا ہوں کہ اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اور میں گواہی دیتا ہوں کہ محمد (صلی اللہ علیہ وسلم) اس کے بندے اور رسول ہیں۔", en: "I bear witness that there is no god but Allah, alone, without partner, and I bear witness that Muhammad is His servant and messenger." },
+            { title: {en: "When entering Masjid", ur: "مسجد میں داخل ہونے کی دعا", ar: "دعاء دخول المسجد"}, ar: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", ur: "اے اللہ! میرے لیے اپنی رحمت کے دروازے کھول دے۔", en: "O Allah, open for me the gates of Your mercy." },
+            { title: {en: "When leaving Masjid", ur: "مسجد سے نکلنے کی دعا", ar: "دعاء الخروج من المسجد"}, ar: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ", ur: "اے اللہ! میں تجھ سے تیرے فضل کا سوال کرتا ہوں۔", en: "O Allah, I ask You from Your favor." },
+            { title: {en: "After Athan", ur: "اذان کے بعد کی دعا", ar: "الدعاء بعد الأذان"}, ar: "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ وَالصَّلَاةِ الْقَائِمَةِ آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ", ur: "اے اللہ! اس کامل پکار اور قائم ہونے والی نماز کے رب! محمد (صلی اللہ علیہ وسلم) کو وسیلہ اور فضیلت عطا فرما اور انہیں اس مقام محمود پر پہنچا جس کا تو نے ان سے وعدہ فرمایا ہے۔", en: "O Allah, Lord of this perfect call and the prayer to be offered, grant Muhammad the privilege and the excellence, and raise him to the praised station which You have promised him." },
+            { title: {en: "When wearing clothes", ur: "لباس پہننے کی دعا", ar: "دعاء لبس الثوب"}, ar: "الْحَمْدُ لِلَّهِ الَّذِي كَسَانِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ", ur: "تمام تعریفیں اللہ کے لیے ہیں جس نے مجھے یہ (لباس) پہنایا اور میری طاقت و قوت کے بغیر مجھے یہ عطا فرمایا۔", en: "Praise be to Allah who has clothed me with this and provided it for me without any might or power on my part." },
+            { title: {en: "Looking in mirror", ur: "آئینہ دیکھنے کی دعا", ar: "دعاء النظر في المرآة"}, ar: "اللَّهُمَّ كَمَا أَحْسَنْتَ خَلْقِي فَأَحْسِنْ خُلُقِي", ur: "اے اللہ! جس طرح تو نے میری صورت اچھی بنائی، اسی طرح میری سیرت (اخلاق) بھی اچھی کر دے۔", en: "O Allah, as You have made my physical appearance beautiful, so make my character beautiful." },
+            { title: {en: "When leaving house", ur: "گھر سے نکلنے کی دعا", ar: "دعاء الخروج من المنزل"}, ar: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", ur: "اللہ کے نام سے، میں نے اللہ پر بھروسہ کیا، اور گناہوں سے بچنے کی ہمت اور نیکی کرنے کی طاقت اللہ ہی کی طرف سے ہے۔", en: "In the name of Allah, I place my trust in Allah, and there is no might or power except with Allah." },
+            { title: {en: "When entering house", ur: "گھر میں داخل ہونے کی دعا", ar: "دعاء دخول المنزل"}, ar: "اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ بِسْمِ اللَّهِ وَلَجْنَا وَبِسْمِ اللَّهِ خَرَجْنَا وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا", ur: "اے اللہ! میں تجھ سے داخل ہونے اور نکلنے کی بھلائی مانگتا ہوں۔ اللہ کے نام سے ہم داخل ہوئے اور اللہ ہی کے نام سے ہم نکلے اور ہم نے اپنے رب اللہ پر بھروسہ کیا۔", en: "O Allah, I ask You for the best of entering and the best of leaving. In the name of Allah we enter and in the name of Allah we leave and upon Allah our Lord we trust." },
+            { title: {en: "Dua for Parents", ur: "والدین کے لیے دعا", ar: "دعاء للوالدين"}, ar: "رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", ur: "اے میرے رب! ان دونوں (والدین) پر رحم فرما جس طرح انہوں نے بچپن میں میری پرورش کی۔", en: "My Lord, have mercy upon them as they brought me up [when I was] small." },
+            { title: {en: "Dua for Knowledge", ur: "علم میں اضافے کی دعا", ar: "دعاء زيادة العلم"}, ar: "رَّبِّ زِدْنِي عِلْمًا", ur: "اے میرے رب! میرے علم میں اضافہ فرما۔", en: "My Lord, increase me in knowledge." },
+            { title: {en: "Dua for Forgiveness", ur: "بخشش کی دعا", ar: "دعاء الاستغفار"}, ar: "أَسْتَغْفِرُ اللَّهَ رَبِّي مِنْ كُلِّ ذَنْبٍ وَأَتُوبُ إِلَيْهِ", ur: "میں اللہ سے اپنے تمام گناہوں کی معافی مانگتا ہوں جو میرا رب ہے اور اسی کی طرف رجوع کرتا ہوں۔", en: "I seek forgiveness from Allah, my Lord, from every sin and I turn to Him." },
+            { title: {en: "Before traveling", ur: "سفر کی دعا", ar: "دعاء السفر"}, ar: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنقَلِبُونَ", ur: "پاک ہے وہ ذات جس نے اسے ہمارے قابو میں کر دیا حالانکہ ہم اسے قابو میں کرنے والے نہ تھے، اور بے شک ہم اپنے رب ہی کی طرف لوٹنے والے ہیں۔", en: "Exalted is He who has subjected this to us, and we could not have [otherwise] subdued it. And indeed, to our Lord we will return." },
+            { title: {en: "When sneezing", ur: "چھینک آنے پر دعا", ar: "دعاء العطاس"}, ar: "الْحَمْدُ لِلَّهِ", ur: "تمام تعریفیں اللہ کے لیے ہیں۔", en: "All praise be to Allah." },
+            { title: {en: "Dua for Goodness", ur: "دنیا و آخرت کی بھلائی کی دعا", ar: "دعاء ربنا آتنا"}, ar: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", ur: "اے ہمارے رب! ہمیں دنیا میں بھی بھلائی عطا فرما اور آخرت میں بھی بھلائی عطا فرما اور ہمیں آگ کے عذاب سے بچا۔", en: "Our Lord, give us in this world [that which is] good and in the afterlife [that which is] good and protect us from the punishment of the Fire." },
+            { title: {en: "Dua for Ease", ur: "مشکل میں آسانی کی دعا", ar: "دعاء تيسير الأمور"}, ar: "اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا", ur: "اے اللہ! کوئی چیز آسان نہیں مگر جسے تو آسان کر دے، اور تو جب چاہتا ہے غم (مشکل) کو آسان کر دیتا ہے۔", en: "O Allah, nothing is easy except what You make easy, and You make the difficult easy if it be Your Will." },
+            { title: {en: "Dua for Protection", ur: "حفاظت کی دعا", ar: "دعاء الحفظ"}, ar: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", ur: "اللہ کے نام سے جس کے نام کی برکت سے زمین اور آسمان میں کوئی چیز نقصان نہیں پہنچا سکتی اور وہ خوب سننے والا، جاننے والا ہے۔", en: "In the name of Allah, with whose name nothing can cause harm in the earth nor in the heavens, and He is the All-Hearing, the All-Knowing." },
+            { title: {en: "Morning Dua", ur: "صبح کی دعا", ar: "أذكار الصباح"}, ar: "اللَّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ", ur: "اے اللہ! تیرے ہی نام کے ساتھ ہم نے صبح کی اور تیرے ہی نام کے ساتھ ہم نے شام کی، تیرے ہی نام کے ساتھ ہم جیتے ہیں اور تیرے ہی نام کے ساتھ ہم مریں گے اور تیری ہی طرف لوٹ کر جانا ہے۔", en: "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the final return." },
+            { title: {en: "Evening Dua", ur: "شام کی دعا", ar: "أذكار المساء"}, ar: "اللَّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ", ur: "اے اللہ! تیرے ہی نام کے ساتھ ہم نے شام کی اور تیرے ہی نام کے ساتھ ہم نے صبح کی، تیرے ہی نام کے ساتھ ہم جیتے ہیں اور تیرے ہی نام کے ساتھ ہم مریں گے اور تیری ہی طرف لوٹنا ہے۔", en: "O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the final return." },
+            { title: {en: "Dua against Anger", ur: "غصہ آنے کی دعا", ar: "دعاء الغضب"}, ar: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", ur: "میں اللہ کی پناہ مانگتا ہوں شیطان مردود سے۔", en: "I seek refuge in Allah from Satan, the rejected." },
+            { title: {en: "Dua for Debt", ur: "قرض سے خلاصی کی دعا", ar: "دعاء قضاء الدين"}, ar: "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ", ur: "اے اللہ! مجھے اپنے حلال کے ساتھ اپنے حرام سے کافی کر دے اور مجھے اپنے فضل سے اپنے سوا ہر کسی سے بے نیاز کر دے۔", en: "O Allah, suffice me with Your lawful against Your prohibited, and make me independent of all those other than You by Your grace." },
+            { title: {en: "Dua for Patience", ur: "صبر کی دعا", ar: "دعاء الصبر"}, ar: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا", ur: "اے ہمارے رب! ہم پر صبر انڈیل دے اور ہمارے قدموں کو جما دے۔", en: "Our Lord, pour upon us patience and plant firmly our feet." },
+            { title: {en: "Dua for Forgiveness (2)", ur: "مغفرت کی ایک اور دعا", ar: "دعاء المغفرة"}, ar: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", ur: "اے میرے رب! بخش دے اور رحم فرما اور تو سب سے بہتر رحم کرنے والا ہے۔", en: "My Lord, forgive and have mercy, and You are the best of the merciful." },
+            { title: {en: "Dua for Shifa", ur: "بیمار کی شفایابی کی دعا", ar: "دعاء الشفاء"}, ar: "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ", ur: "میں اللہ عظیم سے سوال کرتا ہوں جو عرش عظیم کا رب ہے کہ وہ تمہیں شفا عطا فرمائے۔", en: "I ask Allah the Almighty, Lord of the Mighty Throne, to heal you." },
+            { title: {en: "When it Rains", ur: "بارش کے وقت کی دعا", ar: "دعاء المطر"}, ar: "اللَّهُمَّ صَيِّبًا نَافِعًا", ur: "اے اللہ! اسے نفع بخش بارش بنا دے۔", en: "O Allah, make it a beneficial rain." },
+            { title: {en: "When Hearing Thunder", ur: "بادل گرجنے کی دعا", ar: "دعاء الرعد"}, ar: "سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلَائِكَةُ مِنْ خِيفَتِهِ", ur: "پاک ہے وہ ذات جس کی تسبیح گرج اس کی حمد کے ساتھ بیان کرتی ہے اور فرشتے اس کے خوف سے۔", en: "Glory be to Him whom the thunder glorifies with His praise and the angels from fear of Him." },
+            { title: {en: "After Salah", ur: "نماز کے بعد کی دعا", ar: "أذكار بعد الصلاة"}, ar: "اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ", ur: "اے اللہ! تو ہی سلامتی والا ہے اور تجھی سے سلامتی ہے، تو برکت والا ہے اے عظمت اور بزرگی والے۔", en: "O Allah, You are Peace and from You is peace. Blessed are You, O Owner of Majesty and Honor." },
+            { title: {en: "Before Sleeping (2)", ur: "سونے سے پہلے تسبیح", ar: "التسبيح قبل النوم"}, ar: "سُبْحَانَ اللَّهِ (33) ، الْحَمْدُ لِلَّهِ (33) ، اللَّهُ أَكْبَرُ (34)", ur: "سبحان اللہ (33 مرتبہ)، الحمد للہ (33 مرتبہ)، اللہ اکبر (34 مرتبہ)۔", en: "SubhanAllah (33 times), Alhamdulillah (33 times), Allahu Akbar (34 times)." },
+            { title: {en: "Dua for Grief", ur: "غم اور پریشانی کی دعا", ar: "دعاء الهم والحزن"}, ar: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ", ur: "اے اللہ! میں غم، پریشانی، عاجزی اور سستی سے تیری پناہ مانگتا ہوں۔", en: "O Allah, I seek refuge in You from anxiety and sorrow, and from weakness and laziness." },
+            { title: {en: "When Entering Market", ur: "بازار میں داخل ہونے کی دعا", ar: "دعاء دخول السوق"}, ar: "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِي وَيُمِيتُ وَهُوَ حَيٌّ لَا يَمُوتُ بِيَدِهِ الْخَيْرُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ", ur: "اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہی ہے اور اسی کے لیے تمام تعریف ہے، وہی زندہ کرتا ہے اور وہی مارتا ہے اور وہ خود زندہ ہے اسے موت نہیں آئے گی، تمام بھلائی اسی کے ہاتھ میں ہے اور وہ ہر چیز پر قادر ہے۔", en: "There is no god but Allah, alone, without partner. To Him belongs sovereignty and to Him belongs praise. He gives life and causes death, and He is living and does not die. In His hand is all good and He is over all things powerful." },
+            { title: {en: "When Starting Anything", ur: "کام شروع کرنے کی دعا", ar: "البسملة"}, ar: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ", ur: "اللہ کے نام سے شروع جو بڑا مہربان نہایت رحم والا ہے۔", en: "In the name of Allah, the Most Gracious, the Most Merciful." },
+            { title: {en: "Dua for Protection from Evil", ur: "برائی سے بچنے کی دعا", ar: "الاستعاذة"}, ar: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", ur: "میں اللہ کے کامل کلمات کی پناہ مانگتا ہوں ہر اس چیز کی برائی سے جو اس نے پیدا کی۔", en: "I seek refuge in the perfect words of Allah from the evil of what He has created." },
+            { title: {en: "Dua for Success", ur: "کامیابی کی دعا", ar: "دعاء النجاح"}, ar: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", ur: "اے میرے رب! میرا سینہ کھول دے اور میرا کام میرے لیے آسان کر دے۔", en: "My Lord, expand for me my chest and ease for me my task." },
+            { title: {en: "When Seeing Something Liked", ur: "پسندیدہ چیز دیکھنے کی دعا", ar: "ما شاء الله"}, ar: "مَا شَاءَ اللَّهُ لَا قُوَّةَ إِلَّا بِاللَّهِ", ur: "جو اللہ چاہے، اللہ کی مدد کے بغیر کوئی طاقت نہیں۔", en: "What Allah willed [has occurred], there is no power except with Allah." },
+            { title: {en: "Dua for Trust in Allah", ur: "اللہ پر بھروسے کی دعا", ar: "حسبنا الله"}, ar: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", ur: "اللہ ہمیں کافی ہے اور وہ بہترین کارساز ہے۔", en: "Allah is sufficient for us, and He is the best Disposer of affairs." },
+            { title: {en: "Dua for Steadfastness", ur: "دین پر ثابت قدمی کی دعا", ar: "دعاء الثبات"}, ar: "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", ur: "اے دلوں کو پھیرنے والے! میرے دل کو اپنے دین پر ثابت قدم رکھ۔", en: "O Turner of the hearts, keep my heart firm upon Your religion." },
+            { title: {en: "Dua for Guidance", ur: "ہدایت کی دعا", ar: "دعاء الهداية"}, ar: "اللَّهُمَّ اهْدِنِي وَسَدِّدْنِي", ur: "اے اللہ! مجھے ہدایت دے اور مجھے سیدھے راستے پر رکھ۔", en: "O Allah, guide me and keep me on the right path." },
+            { title: {en: "When Feeling Pain", ur: "تکلیف کے وقت کی دعا", ar: "عند الشعور بالألم"}, ar: "بِسْمِ اللَّهِ (3) أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ (7)", ur: "بسم اللہ (3 بار)، میں اللہ اور اس کی قدرت کی پناہ مانگتا ہوں اس چیز کی برائی سے جو میں محسوس کرتا ہوں اور جس سے میں ڈرتا ہوں (7 بار)۔", en: "Bismillah (3 times). I seek refuge in Allah and His power from the evil of what I feel and fear (7 times)." },
+            { title: {en: "Dua for a Good Ending", ur: "خاتمہ بالخیر کی دعا", ar: "دعاء حسن الخاتمة"}, ar: "تَوَفَّنِي مُسْلِمًا وَأَلْحِقْنِي بِالصَّالِحِينَ", ur: "مجھے اسلام کی حالت میں موت عطا فرما اور مجھے صالحین کے ساتھ ملا دے۔", en: "Cause me to die as a Muslim and join me with the righteous." },
+            { title: {en: "Dua for Rain (2)", ur: "بارش طلب کرنے کی دعا", ar: "دعاء الاستسقاء"}, ar: "اللَّهُمَّ أَغِثْنَا ، اللَّهُمَّ أَغِثْنَا ، اللَّهُمَّ أَغِثْنَا", ur: "اے اللہ! ہم پر بارش برسا، اے اللہ! ہم پر بارش برسا، اے اللہ! ہم پر بارش برسا۔", en: "O Allah, send us rain. O Allah, send us rain. O Allah, send us rain." },
+            { title: {en: "Dua for the Deceased", ur: "میت کے لیے دعا", ar: "دعاء للميت"}, ar: "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ", ur: "اے اللہ! اس کی مغفرت فرما، اس پر رحم فرما، اسے عافیت دے اور اسے معاف کر دے۔", en: "O Allah, forgive him and have mercy on him and give him safety and pardon him." },
+            { title: {en: "When Seeing the New Moon", ur: "نیا چاند دیکھنے کی دعا", ar: "دعاء رؤية الهلال"}, ar: "اللَّهُمَّ أَهِلَّهُ عَلَيْنَا بِالْيُمْنِ وَالْإِيمَانِ وَالسَّلَامَةِ وَالْإِسْلَامِ رَبِّي وَرَبُّكَ اللَّهُ", ur: "اے اللہ! اس چاند کو ہم پر برکت، ایمان، سلامتی اور اسلام کے ساتھ نکال۔ (اے چاند!) میرا اور تیرا رب اللہ ہے۔", en: "O Allah, bring it over us with blessing and faith, and safety and Islam. My Lord and your Lord is Allah." },
+            { title: {en: "Dua for Protection from Hell", ur: "جہنم سے پناہ کی دعا", ar: "الاستعاذة من النار"}, ar: "اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ (7)", ur: "اے اللہ! مجھے آگ (جہنم) سے بچا۔ (7 بار)۔", en: "O Allah, protect me from the Fire (7 times)." },
+            { title: {en: "Final Dua", ur: "آخری دعا (جامع دعا)", ar: "دعاء جامع"}, ar: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ", ur: "اے اللہ! میں تجھ سے جنت کا سوال کرتا ہوں اور آگ سے تیری پناہ مانگتا ہوں۔", en: "O Allah, I ask You for Paradise and I seek refuge in You from the Fire." }
+        ];
+
+        function renderDuas() {
+            const display = document.getElementById('dua-display');
+            const counter = document.getElementById('dua-counter');
+            const dua = duas[currentDuaIndex];
+
+            display.innerHTML = `
+                <div class="step-title">${dua.title[currentDuaLang]}</div>
+                <p class="text-arabic">${dua.ar}</p>
+                <p class="text-translation">${dua[currentDuaLang]}</p>
+            `;
+
+            counter.innerText = `Dua ${currentDuaIndex + 1} / ${duas.length}`;
+
+            document.getElementById('btn-prev-dua').disabled = currentDuaIndex === 0;
+            document.getElementById('btn-next-dua').disabled = currentDuaIndex === duas.length - 1;
+
+            updateNavButtons(currentDuaLang, 'dua');
+        }
+
+        function nextDua() { if (currentDuaIndex < duas.length - 1) { currentDuaIndex++; renderDuas(); } }
+        function prevDua() { if (currentDuaIndex > 0) { currentDuaIndex--; renderDuas(); } }
+
+        function setDuaLang(lang, btn) {
+            currentDuaLang = lang;
+            document.querySelectorAll('#dua .lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Update direction
+            const container = document.getElementById('dua-display');
+            container.parentElement.dir = (lang === 'en' ? 'ltr' : 'rtl');
+
+            renderDuas();
+        }
+
+        // --- Nimaz Logic ---
+        let currentNimazLang = 'ur';
+
+        const nimazSteps = [
+            { step: {en: "Niyyah (Intention)", ur: "نیت", ar: "النية"}, ar: "نويت أن أصلي لله تعالى...", ur: "میں نیت کرتا ہوں اللہ تعالیٰ کے لیے (نماز کا نام)...", en: "I intend to pray for Allah (name of prayer)..." },
+            { step: {en: "Takbeer-e-Tahreema", ur: "تکبیر تحریمہ", ar: "تكبيرة الإحرام"}, ar: "اللّٰہُ اَکْبَرُ", ur: "اللہ سب سے بڑا ہے۔", en: "Allah is the Greatest." },
+            { step: {en: "Sana", ur: "ثناء", ar: "الثناء"}, ar: "سُبْحَانَکَ اللّٰھُمَّ وَبِحَمْدِکَ وَتَبَارَکَ اسْمُکَ وَتَعَالٰی جَدُّکَ وَلَا اِلٰہَ غَیْرُکَ", ur: "پاک ہے تو اے اللہ! اور اپنی تعریف کے ساتھ، اور تیرا نام برکت والا ہے، اور تیری شان بلند ہے، اور تیرے سوا کوئی معبود نہیں۔", en: "Glory be to You, O Allah, and all praise is Yours. Blessed is Your name, and exalted is Your majesty. There is no god besides You." },
+            { step: {en: "Ta'awwuz", ur: "تعوذ", ar: "الاستعاذة"}, ar: "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", ur: "میں اللہ کی پناہ مانگتا ہوں شیطان مردود سے۔", en: "I seek refuge in Allah from Satan, the rejected." },
+            { step: {en: "Tasmiyah", ur: "تسمیہ", ar: "البسملة"}, ar: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ", ur: "اللہ کے نام سے شروع جو بڑا مہربان نہایت رحم والا ہے۔", en: "In the name of Allah, the Most Gracious, the Most Merciful." },
+            { step: {en: "Surah Al-Fatiha", ur: "سورہ فاتحہ", ar: "سورة الفاتحة"}, ar: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ الرَّحْمَنِ الرَّحِيمِ مَالِكِ يَوْمِ الدِّينِ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", ur: "سب تعریفیں اللہ کے لیے ہیں جو تمام جہانوں کا پالنے والا ہے، نہایت مہربان، بہت رحم والا ہے، روزِ جزا کا مالک ہے، ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں، ہمیں سیدھا راستہ دکھا، ان لوگوں کا راستہ جن پر تو نے انعام کیا، نہ ان کا جن پر غضب کیا گیا اور نہ گمراہوں کا۔", en: "Praise be to Allah, Lord of the worlds. The Most Gracious, the Most Merciful. Master of the Day of Judgment. You alone we worship, and You alone we ask for help. Guide us to the straight path. The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray." },
+            { step: {en: "Any Surah (e.g., Al-Ikhlas)", ur: "کوئی بھی سورہ (مثلاً سورہ اخلاص)", ar: "سورة الإخلاص"}, ar: "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ", ur: "کہہ دیجئے: وہ اللہ ایک ہے، اللہ بے نیاز ہے، نہ اس نے کسی کو جنا اور نہ وہ جنا گیا، اور اس کا کوئی ہمسر نہیں۔", en: "Say, 'He is Allah, [who is] One. Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.'" },
+            { step: {en: "Ruku (Bowing)", ur: "رکوع", ar: "الركوع"}, ar: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", ur: "پاک ہے میرا رب عظمت والا۔ (3 بار)", en: "Glory be to my Lord, the Almighty. (3 times)" },
+            { step: {en: "Rising from Ruku", ur: "رکوع سے اٹھنا", ar: "الرفع من الركوع"}, ar: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ، رَبَّنَا لَكَ الْحَمْدُ", ur: "اللہ نے اس کی سن لی جس نے اس کی تعریف کی۔ اے ہمارے رب! تیرے ہی لیے تمام تعریفیں ہیں۔", en: "Allah hears those who praise Him. Our Lord, to You be all praise." },
+            { step: {en: "Sajdah (Prostration)", ur: "سجدہ", ar: "السجود"}, ar: "سُبْحَانَ رَبِّيَ الْأَعْلَى", ur: "پاک ہے میرا رب سب سے بلند۔ (3 بار)", en: "Glory be to my Lord, the Most High. (3 times)" },
+            { step: {en: "Tashahhud", ur: "تشہد", ar: "التشهد"}, ar: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", ur: "تمام زبانی، بدنی اور مالی عبادتیں اللہ ہی کے لیے ہیں۔ اے نبی! آپ پر سلام ہو اور اللہ کی رحمت اور اس کی برکتیں ہوں۔ ہم پر اور اللہ کے نیک بندوں پر سلام ہو۔ میں گواہی دیتا ہوں کہ اللہ کے سوا کوئی معبود نہیں اور میں گواہی دیتا ہوں کہ محمد (صلی اللہ علیہ وسلم) اس کے بندے اور رسول ہیں۔", en: "All compliments, prayers and pure words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous slaves of Allah. I bear witness that there is no god but Allah and I bear witness that Muhammad is His slave and Messenger." },
+            { step: {en: "Durood-e-Ibrahim", ur: "درود ابراہیمی", ar: "الصلاة الإبراهيمية"}, ar: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ", ur: "اے اللہ! محمد (صلی اللہ علیہ وسلم) اور ان کی آل پر رحمت نازل فرما جس طرح تو نے ابراہیم (علیہ السلام) اور ان کی آل پر رحمت نازل فرمائی، بے شک تو قابل تعریف اور بڑی شان والا ہے۔ اے اللہ! محمد (صلی اللہ علیہ وسلم) اور ان کی آل پر برکت نازل فرما جس طرح تو نے ابراہیم (علیہ السلام) اور ان کی آل پر برکت نازل فرمائی، بے شک تو قابل تعریف اور بڑی شان والا ہے۔", en: "O Allah, send prayers upon Muhammad and upon the family of Muhammad as You sent prayers upon Ibrahim and upon the family of Ibrahim; You are indeed Worthy of Praise, Full of Glory. O Allah, send blessings upon Muhammad and upon the family of Muhammad as You sent blessings upon Ibrahim and upon the family of Ibrahim; You are indeed Worthy of Praise, Full of Glory." },
+            { step: {en: "Dua-e-Masoorah", ur: "دعا ماثورہ", ar: "الدعاء بعد التشهد"}, ar: "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ ، رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ", ur: "اے میرے رب! مجھے اور میری اولاد کو نماز قائم کرنے والا بنا دے، اے ہمارے رب! اور میری دعا قبول فرما۔ اے ہمارے رب! مجھے اور میرے والدین کو اور تمام مومنوں کو اس دن بخش دے جس دن حساب قائم ہوگا۔", en: "My Lord, make me an establisher of prayer, and [many] from my descendants. Our Lord, and accept my supplication. Our Lord, forgive me and my parents and the believers the Day the account is established." },
+            { step: {en: "Salam", ur: "سلام", ar: "التسليم"}, ar: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ", ur: "تم پر سلامتی ہو اور اللہ کی رحمت ہو۔", en: "Peace and mercy of Allah be upon you." }
+        ];
+
+        function renderNimaz() {
+            const container = document.getElementById('nimaz-container');
+            container.innerHTML = nimazSteps.map(step => `
+                <div class="nimaz-card">
+                    <div class="step-title">${step.step[currentNimazLang]}</div>
+                    <p class="text-arabic">${step.ar}</p>
+                    <p class="text-translation">${step[currentNimazLang]}</p>
+                </div>
+            `).join('');
+        }
+
+        function setNimazLang(lang, btn) {
+            currentNimazLang = lang;
+            document.querySelectorAll('#nimaz .lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const container = document.getElementById('nimaz-container');
+            container.parentElement.dir = (lang === 'en' ? 'ltr' : 'rtl');
+
+            renderNimaz();
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'ur';
+            setPageLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
