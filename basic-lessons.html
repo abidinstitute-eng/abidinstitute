@@ -200,6 +200,15 @@
                 font-size: 0.9rem;
             }
         }
+        /* Hide number input arrows */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 <body>
@@ -251,7 +260,11 @@
                         <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida">
                             Previous
                         </button>
-                        <span id="page-info" class="fw-bold fs-4">Page 1 / 31</span>
+                        <div class="d-flex align-items-center gap-2 fw-bold fs-4">
+                            <span id="page-text-label">Page</span>
+                            <input type="number" id="page-input" value="1" min="1" max="31" class="form-control" style="width: 70px; text-align: center; font-weight: bold; border-color: var(--color-primary);">
+                            <span>/ 31</span>
+                        </div>
                         <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida">
                             Next
                         </button>
@@ -408,13 +421,17 @@
         let currentPage = 1;
         const totalPages = 31;
         const imgElement = document.getElementById('qaida-img');
-        const pageInfo = document.getElementById('page-info');
 
         function updateGallery(scroll = true) {
             const pageNum = String(currentPage).padStart(4, '0');
             imgElement.src = `NOORAI QEEDHA/noorani_qaida_page-${pageNum}.jpg`;
             const data = pageTranslations[currentLang];
-            pageInfo.innerText = `${data.page} ${currentPage} / ${totalPages}`;
+
+            const pageInput = document.getElementById('page-input');
+            const pageTextLabel = document.getElementById('page-text-label');
+            if (pageTextLabel) pageTextLabel.innerText = data.page;
+            if (pageInput) pageInput.value = currentPage;
+
             updateNavButtons(currentLang, 'qaida');
             if(scroll) document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -559,6 +576,22 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLang') || 'ur';
             setPageLanguage(savedLang);
+
+            // Add Enter key listener for page jumping
+            const pageInput = document.getElementById('page-input');
+            if (pageInput) {
+                pageInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        let newPage = parseInt(this.value);
+                        if (!isNaN(newPage) && newPage >= 1 && newPage <= totalPages) {
+                            currentPage = newPage;
+                            updateGallery();
+                        } else {
+                            this.value = currentPage;
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
