@@ -34,6 +34,15 @@
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* Disable text selection */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
   </head>
   <body>
     <!-- To top -->
@@ -260,5 +269,40 @@
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // --- Protection Logic ---
+        // Disable Right Click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            const isCmdOrCtrl = e.ctrlKey || e.metaKey;
+            // F12
+            if (e.keyCode === 123 || e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element Inspector)
+            if (isCmdOrCtrl && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (View Source), Ctrl+S (Save), Ctrl+P (Print), Ctrl+C (Copy)
+            if (isCmdOrCtrl && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable Copy/Cut/Paste
+        ['copy', 'cut', 'paste'].forEach(event => {
+            document.addEventListener(event, (e) => e.preventDefault());
+        });
+
+        // Prevent Image Dragging
+        document.addEventListener('dragstart', (e) => {
+            if (e.target.nodeName === 'IMG') e.preventDefault();
+        });
+    </script>
   </body>
 </html>
