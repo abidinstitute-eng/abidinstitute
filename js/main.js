@@ -13,6 +13,45 @@ span.onclick = () => {
   window.scrollTo(0, 0);
 };
 
+// === Zoom Functionality === //
+let currentZoomLevel = 1;
+function adjustZoom(factor) {
+    currentZoomLevel *= factor;
+    if (currentZoomLevel > 2) currentZoomLevel = 2;
+    if (currentZoomLevel < 0.8) currentZoomLevel = 0.8;
+    applyZoom();
+}
+function resetZoom() {
+    currentZoomLevel = 1;
+    applyZoom();
+}
+function applyZoom() {
+    document.body.style.zoom = currentZoomLevel;
+    // Fallback for browsers that don't support zoom property
+    if (typeof document.body.style.zoom === "undefined") {
+        document.documentElement.style.transform = `scale(${currentZoomLevel})`;
+        document.documentElement.style.transformOrigin = "top center";
+    }
+}
+
+// Inject Zoom Controls into the page
+document.addEventListener('DOMContentLoaded', () => {
+    const zoomDiv = document.createElement('div');
+    zoomDiv.className = 'zoom-controls';
+    zoomDiv.innerHTML = `
+        <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
+            <i class="fa fa-search-plus"></i>
+        </button>
+        <button class="zoom-btn" onclick="adjustZoom(0.9)" title="Zoom Out">
+            <i class="fa fa-search-minus"></i>
+        </button>
+        <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+            <i class="fa fa-refresh"></i>
+        </button>
+    `;
+    document.body.appendChild(zoomDiv);
+});
+
 // === Language Switcher === //
 const translations = {
     'en': {
@@ -36,8 +75,8 @@ const translations = {
         'goal3_h4': 'Tajweed of the Quran',
         'goal3_p': 'Improving recitation, rules courses and connected Sanad',
         'contact_h3': 'Contact Us',
-        'address': 'House 23 Khayaban-e-Sir Syed Sector 2, Rawalpindi',
-        'phone': 'Phone: +92 349 7469638 | (051) 4832342',
+        'address': 'House 23 Khayaban-e-Sir Syed Sector 2, Khayaban e Sir',
+        'phone': '+92 349 7469638',
         'name_label': 'Name',
         'email_label': 'Email',
         'message_label': 'Message',
@@ -68,8 +107,8 @@ const translations = {
         'goal3_h4': 'تجويد القرآن الكريم',
         'goal3_p': 'تحسين التلاوة, دورات الأحكام والسند المتصل',
         'contact_h3': 'تواصل معنا',
-        'address': 'منزل 23، خیابان سر سید سیکٹر 2، راولپنڈی',
-        'phone': 'ہاتف: +92 349 7469638 | (051) 4832342',
+        'address': 'منزل 23، خیابان سر سید سیکٹر 2، خیابان سر',
+        'phone': '+92 349 7469638',
         'name_label': 'الاسم',
         'email_label': 'البريد الالكتروني',
         'message_label': 'الرسالة',
@@ -100,8 +139,8 @@ const translations = {
         'goal3_h4': 'تجويد القرآن الکریم',
         'goal3_p': 'تلاوت میں بہتری، احکام کے کورسز اور سند متصل',
         'contact_h3': 'ہم سے رابطہ کریں',
-        'address': 'ہاؤس 23، خیابان سر سید سیکٹر 2، راولپنڈی',
-        'phone': 'فون: +92 349 7469638 | (051) 4832342',
+        'address': 'ہاؤس 23، خیابان سر سید سیکٹر 2، خیابان سر',
+        'phone': '+92 349 7469638',
         'name_label': 'نام',
         'email_label': 'ای میل',
         'message_label': 'پیغام',

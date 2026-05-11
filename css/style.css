@@ -505,3 +505,35 @@ section .section-heading {
 .lang-dropdown .icon-globe {
   font-size: 1.4rem;
 }
+
+/* Accessibility Zoom Button */
+.zoom-controls {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zoom-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: 0.3s;
+}
+
+.zoom-btn:hover {
+  transform: scale(1.1);
+  background: var(--color-secondary);
+}

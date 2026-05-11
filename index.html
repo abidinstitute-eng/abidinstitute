@@ -34,6 +34,15 @@
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        /* Disable text selection */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
   </head>
   <body>
     <!-- To top -->
@@ -68,6 +77,9 @@
               <a class="nav-link" href="#whous">من نحن</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="basic-lessons.html" id="nav-lessons">الدروس الأساسية</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#contactus">تواصل معنا</a>
             </li>
           </ul>
@@ -95,6 +107,9 @@
         </div>
         <h1 id="hero-title">أكاديمية تربوية تعليمية</h1>
         <p id="hero-desc">تهدف إلى تعليم القرآن الكريم و مهارات التجويد</p>
+        <div class="mt-5">
+            <a href="basic-lessons.html" id="hero-lessons-btn" class="btn btn-lg px-5 py-3" style="background-color: #ba992e; color: white; border-radius: 50px; font-weight: bold; text-decoration: none;">BASIC LESSONS</a>
+        </div>
       </div>
     </section>
     <!-- Numbers -->
@@ -209,8 +224,13 @@
         <div class="row">
           <div class="contact__form col-sm">
             <div class="contact-info mb-5" style="font-size: 1.8rem; color: var(--color-body);">
-              <p><i class="fa fa-map-marker"></i> <span id="contact-address">House 23 Khayaban-e-Sir Syed Sector 2, Rawalpindi</span></p>
-              <p><i class="fa fa-phone"></i> <span id="contact-phone">+92 349 7469638 | (051) 4832342</span></p>
+              <p><i class="fa fa-map-marker"></i> <span id="contact-address">House 23 Khayaban-e-Sir Syed Sector 2, Khayaban e Sir</span></p>
+              <p>
+                <i class="fa fa-phone"></i> <span id="contact-phone" style="direction: ltr; display: inline-block;">+92 349 7469638</span>
+                <a href="https://wa.me/923497469638" target="_blank" style="color: #25D366; margin-inline-start: 15px; text-decoration: none;">
+                  <i class="fa fa-whatsapp"></i>
+                </a>
+              </p>
             </div>
             <form action="">
               <div class="input-group-lg mb-3">
@@ -245,14 +265,87 @@
     </section>
     <footer class="footer">
       <div class="container">
-        <div class="footer__content">
-          <p class="copy-right">
+        <div class="footer__content text-center">
+          <p class="copy-right mb-2">
             All rights reserved &copy; <span class="logo">Abid Rafiq Academy for the Quran</span>
           </p>
+          <div class="whatsapp-footer">
+            <a href="https://wa.me/923497469638" target="_blank" style="color: #25D366; font-size: 1.5rem; text-decoration: none; font-weight: bold; direction: ltr; display: inline-block;">
+              <i class="fa fa-whatsapp"></i> WhatsApp: +92 349 7469638
+            </a>
+          </div>
         </div>
       </div>
     </footer>
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
+            <i class="fa fa-search-plus"></i>
+        </button>
+        <button class="zoom-btn" onclick="adjustZoom(0.9)" title="Zoom Out">
+            <i class="fa fa-search-minus"></i>
+        </button>
+        <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+            <i class="fa fa-refresh"></i>
+        </button>
+    </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Zoom Logic
+        let currentZoomLevel = 1;
+        function adjustZoom(factor) {
+            currentZoomLevel *= factor;
+            if (currentZoomLevel > 2) currentZoomLevel = 2;
+            if (currentZoomLevel < 0.8) currentZoomLevel = 0.8;
+            applyZoom();
+        }
+        function resetZoom() {
+            currentZoomLevel = 1;
+            applyZoom();
+        }
+        function applyZoom() {
+            document.body.style.zoom = currentZoomLevel;
+            // Fallback for browsers that don't support zoom property
+            if (typeof document.body.style.zoom === "undefined") {
+                document.documentElement.style.transform = `scale(${currentZoomLevel})`;
+                document.documentElement.style.transformOrigin = "top center";
+            }
+        }
+
+        // --- Protection Logic ---
+        // Disable Right Click
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            const isCmdOrCtrl = e.ctrlKey || e.metaKey;
+            // F12
+            if (e.keyCode === 123 || e.key === 'F12') {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element Inspector)
+            if (isCmdOrCtrl && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (View Source), Ctrl+S (Save), Ctrl+P (Print), Ctrl+C (Copy)
+            if (isCmdOrCtrl && (e.keyCode === 85 || e.keyCode === 83 || e.keyCode === 80 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Disable Copy/Cut/Paste
+        ['copy', 'cut', 'paste'].forEach(event => {
+            document.addEventListener(event, (e) => e.preventDefault());
+        });
+
+        // Prevent Image Dragging
+        document.addEventListener('dragstart', (e) => {
+            if (e.target.nodeName === 'IMG') e.preventDefault();
+        });
+    </script>
   </body>
 </html>
