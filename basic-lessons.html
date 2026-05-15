@@ -2,6 +2,14 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Lessons | Abid Rafiq Quran Academy - Online Quran Learning</title>
     <meta name="description" content="Explore basic Islamic lessons including Noorani Qaida, 50 Masnoon Duas, Nimaz completion, and the Holy Quran. Start your spiritual journey with Abid Rafiq Quran Academy.">
@@ -389,6 +397,25 @@
 
     <script src="js/main.js"></script>
     <script src="js/zoom.js"></script>
+    <!-- Injected Zoom Controls -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const zoomDiv = document.createElement('div');
+        zoomDiv.className = 'zoom-controls';
+        zoomDiv.innerHTML = `
+            <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
+                <i class="fa fa-search-plus"></i>
+            </button>
+            <button class="zoom-btn" onclick="adjustZoom(0.9)" title="Zoom Out">
+                <i class="fa fa-search-minus"></i>
+            </button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+                <i class="fa fa-refresh"></i>
+            </button>
+        `;
+        document.body.appendChild(zoomDiv);
+    });
+    </script>
     <script>
         // --- Shared Logic ---
         const pageTranslations = {
