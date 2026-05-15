@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /AdminPhpHelper/
+Disallow: /admin-page.php
+Disallow: /Supervisor.php
+Disallow: /Sudent.php
+
+Sitemap: https://abidrafiqquranacademy.qzz.io/sitemap.xml

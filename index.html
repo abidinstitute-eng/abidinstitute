@@ -290,6 +290,25 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/zoom.js"></script>
     <script src="js/main.js"></script>
+    <!-- Injected Zoom Controls -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const zoomDiv = document.createElement('div');
+        zoomDiv.className = 'zoom-controls';
+        zoomDiv.innerHTML = `
+            <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
+                <i class="fa fa-search-plus"></i>
+            </button>
+            <button class="zoom-btn" onclick="adjustZoom(0.9)" title="Zoom Out">
+                <i class="fa fa-search-minus"></i>
+            </button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+                <i class="fa fa-refresh"></i>
+            </button>
+        `;
+        document.body.appendChild(zoomDiv);
+    });
+    </script>
     <script>
         // --- Protection Logic ---
         // Disable Right Click
