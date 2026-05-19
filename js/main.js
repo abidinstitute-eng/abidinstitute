@@ -241,4 +241,52 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load preferred language
     const savedLang = localStorage.getItem('preferredLang') || 'ar';
     changeLanguage(savedLang);
+
+    // --- Contact Form Submission Logic ---
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('textarea').value;
+
+            const recipientEmail = 'abidinstitute@gmail.com';
+            const whatsappNumber = '923497469638';
+
+            // Construct Messages
+            const emailSubject = `Contact Form Submission from ${name}`;
+            const bodyContent = `Name: ${name}%0D%0AEmail: ${email}%0D%0AMessage: ${message}`;
+
+            const whatsappMsg = `*New Inquiry from Abid Quran Academy Website*%0A*Name:* ${name}%0A*Email:* ${email}%0A*Message:* ${message}`;
+
+            // Open Email client
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(emailSubject)}&body=${bodyContent}`;
+
+            // Open WhatsApp
+            const waLink = `https://wa.me/${whatsappNumber}?text=${whatsappMsg}`;
+
+            // We will first try to open WhatsApp, then provide a fallback for Email
+            // Alternatively, ask user to choose. For better UX, we'll open both or let them know.
+
+            // Preferred primary action: WhatsApp
+            window.open(waLink, '_blank');
+
+            // Secondary fallback or simultaneous action: Mail
+            window.location.href = mailtoLink;
+
+            // Show success message
+            const successMsg = document.getElementById('formSuccess');
+            if (successMsg) {
+                successMsg.style.display = 'block';
+                // Reset form
+                contactForm.reset();
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+            }
+        });
+    }
 });

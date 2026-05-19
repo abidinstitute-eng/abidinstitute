@@ -294,10 +294,10 @@
                 </a>
               </p>
             </div>
-            <form action="">
+            <form id="contactForm">
               <div class="input-group-lg mb-3">
                 <label for="name" class="form-label">الاسم</label>
-                <input type="text" class="form-control" id="name" />
+                <input type="text" class="form-control" id="name" required />
               </div>
               <div class="input-group-lg mb-3">
                 <label for="email" class="form-label">البريد الالكتروني</label>
@@ -306,6 +306,7 @@
                   class="form-control"
                   id="email"
                   aria-describedby="emailHelp"
+                  required
                 />
               </div>
               <div class="input-group-lg">
@@ -314,9 +315,13 @@
                   class="form-control"
                   placeholder="اكتب رسالتك هنا"
                   id="textarea"
+                  required
                 ></textarea>
               </div>
               <button type="submit" class="btn">أرسل</button>
+              <div id="formSuccess" class="mt-3 text-success fw-bold" style="display: none; font-size: 1.2rem;">
+                YOUR MESSAGE HAS BEEN SENT SUCCESSFULLY!
+              </div>
             </form>
           </div>
           <div class="contact__content col-md">
