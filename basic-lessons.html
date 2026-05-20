@@ -470,7 +470,7 @@
                 <div class="gallery-container">
                     <h2 class="mb-4" id="quran-title" style="color: var(--color-secondary);">Holy Quran Viewer</h2>
                     <div class="gallery-img-wrapper">
-                        <img id="quran-img" src="https://abidinstitute-eng.github.io/ReadingQuran/standard1-quran-1.jpg" alt="Holy Quran Page" class="gallery-img">
+                        <img id="quran-img" src="https://abidinstitute-eng.github.io/ReadingQuran/standard1-quran-3.jpg" alt="Holy Quran Page" class="gallery-img">
                     </div>
                     <div class="d-flex justify-content-between align-items-center px-md-5 flex-wrap gap-3">
                         <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran">
@@ -479,7 +479,7 @@
 
                         <div class="page-jump-box">
                             <span id="quran-page-label">Page</span>
-                            <input type="number" id="quran-page-input" value="1" min="1" max="625"
+                            <input type="number" id="quran-page-input" value="3" min="3" max="625"
                                    title="Type page number and press Enter"
                                    class="page-input-field">
                             <span class="page-total">/ 625</span>
@@ -648,7 +648,7 @@
         function prevPage() { if (currentPage > 1) { currentPage--; updateGallery(); } }
 
         // --- Holy Quran Logic ---
-        let currentQuranPage = 1;
+        let currentQuranPage = 3;
         const totalQuranPages = 625;
         const quranImgElement = document.getElementById('quran-img');
 
@@ -666,7 +666,7 @@
         }
 
         function nextQuranPage() { if (currentQuranPage < totalQuranPages) { currentQuranPage++; updateQuranGallery(); } }
-        function prevQuranPage() { if (currentQuranPage > 1) { currentQuranPage--; updateQuranGallery(); } }
+        function prevQuranPage() { if (currentQuranPage > 3) { currentQuranPage--; updateQuranGallery(); } }
 
         // --- Dua Logic ---
         let currentDuaIndex = 0;
@@ -887,7 +887,7 @@
                 quranPageInput.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') {
                         let newPage = parseInt(this.value);
-                        if (!isNaN(newPage) && newPage >= 1 && newPage <= totalQuranPages) {
+                        if (!isNaN(newPage) && newPage >= 3 && newPage <= totalQuranPages) {
                             currentQuranPage = newPage;
                             updateQuranGallery();
                         } else {
@@ -896,6 +896,17 @@
                     }
                 });
             }
+
+            // Security Restrictions
+            document.addEventListener('contextmenu', event => event.preventDefault());
+            document.onkeydown = function (e) {
+                if (e.keyCode == 123) return false;
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+                if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+                if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+            };
+            setInterval(() => { console.clear(); }, 500);
         });
     </script>
 </body>

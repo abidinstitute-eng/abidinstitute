@@ -1,3 +1,124 @@
+// === Security & Content Protection === //
+// Disable Right Click
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Disable Keyboard Shortcuts
+document.onkeydown = function (e) {
+    // Disable F12
+    if (e.keyCode == 123) {
+        return false;
+    }
+    // Disable Ctrl+Shift+I (Inspect)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+        return false;
+    }
+    // Disable Ctrl+Shift+C (Inspect Element)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+        return false;
+    }
+    // Disable Ctrl+Shift+J (Console)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+        return false;
+    }
+    // Disable Ctrl+U (View Source)
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+        return false;
+    }
+    // Disable Ctrl+S (Save Page)
+    if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+        return false;
+    }
+};
+
+// Disable dragging of images
+document.addEventListener('dragstart', (e) => {
+    if (e.target.nodeName === 'IMG') {
+        e.preventDefault();
+    }
+});
+
+// Advanced DevTools Detection & Protection
+(function() {
+    const devtools = {
+        isOpen: false,
+        orientation: undefined
+    };
+
+    const threshold = 160;
+
+    const emitEvent = (isOpen, orientation) => {
+        if (isOpen) {
+            // If DevTools is open, we clear console and can add more logic
+            console.clear();
+            // console.log('%cDevTools is restricted for security reasons.', 'color: red; font-size: 20px; font-weight: bold;');
+        }
+    };
+
+    setInterval(() => {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+        const orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+        if (
+            !(heightThreshold && widthThreshold) &&
+            ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)
+        ) {
+            if (!devtools.isOpen || devtools.orientation !== orientation) {
+                emitEvent(true, orientation);
+            }
+
+            devtools.isOpen = true;
+            devtools.orientation = orientation;
+        } else {
+            if (devtools.isOpen) {
+                emitEvent(false, undefined);
+            }
+
+            devtools.isOpen = false;
+            devtools.orientation = undefined;
+        }
+
+        if (devtools.isOpen) {
+            console.clear();
+            // Optional: debugger; // This will pause execution if DevTools is open
+        }
+    }, 500);
+})();
+
+// Anti-Debugger (Pauses script if DevTools is open)
+setInterval(function() {
+    (function (a) {
+        return (function (a) {
+            return (Function('Function(arguments[0])(arguments[1])')(a, a));
+        })(function (a) {
+            if (arguments[1] === 'bugger') {
+                return (function (b) {
+                    return (function (b) {
+                        return (Function('Function(arguments[0])(arguments[1])')(b, b));
+                    })(function (b) {
+                        if (b === 'bugger') {
+                            (function () {
+                                return (true);
+                            }
+                            ['constructor']('de' + 'bugger')['call']('action'));
+                        } else {
+                            (function () {
+                                return (false);
+                            }
+                            ['constructor']('de' + 'bugger')['apply']('stateObject'));
+                        }
+                    });
+                })(a);
+            } else {
+                (function () {
+                    return (false);
+                }
+                ['constructor']('de' + 'bugger')['apply']('stateObject'));
+            }
+        });
+    })('bugger');
+}, 1000);
+
 // === AOS === //
 AOS.init();
 // === Up button === //
