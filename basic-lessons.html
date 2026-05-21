@@ -26,6 +26,8 @@
     <!-- OurStyles -->
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <style>
@@ -42,13 +44,23 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .gallery-container, .viewer-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 20px auto;
             text-align: center;
             background: #fff;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        @media (max-width: 768px) {
+            .gallery-container, .viewer-container {
+                padding: 15px;
+                margin: 10px;
+            }
+            .gallery-img-wrapper {
+                padding: 5px;
+                min-height: auto;
+            }
         }
         .gallery-img-wrapper, .dua-wrapper {
             position: relative;
@@ -311,23 +323,56 @@
     </style>
 </head>
 <body>
+    <!-- To top -->
+    <span class="up">⬆</span>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg py-3">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary py-4">
       <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
-          <img src="img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
-          <span class="d-none d-sm-inline" style="color: var(--color-secondary); font-weight: bold;">Abid Rafiq Academy</span>
+        <a data-aos="fade-left" class="navbar-brand" href="index.html">
+          <img src="img/logo.png" alt="Logo" style="height: 60px; margin-inline-end: 15px; display: inline-block !important; visibility: visible !important;">
         </a>
 
-        <div class="d-flex align-items-center gap-3">
-            <div class="navbar-lang-switcher">
-                <button class="lang-btn" onclick="setPageLanguage('ar')">AR</button>
-                <button class="lang-btn" onclick="setPageLanguage('ur')">UR</button>
-                <button class="lang-btn" onclick="setPageLanguage('en')">EN</button>
+        <button
+          data-aos="fade-right"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul data-aos="fade-right" class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#prog">البرامج</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#whous">من نحن</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="basic-lessons.html" id="nav-lessons">الدروس الأساسية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contactus">تواصل معنا</a>
+            </li>
+          </ul>
+
+          <div class="d-flex align-items-center">
+            <div class="lang-dropdown ms-lg-3" data-aos="fade-left">
+              <button class="lang-btn">
+                 <i class="fa fa-globe"></i> اللغة
+              </button>
+              <div class="lang-content">
+                <a href="?lang=en">English</a>
+                <a href="?lang=ur">اردو</a>
+                <a href="?lang=ar">العربية</a>
+              </div>
             </div>
-            <a href="index.html" class="back-home" id="btn-back">
-                <i class="fa fa-home"></i> <span id="back-text">BACK TO HOME</span>
-            </a>
+          </div>
         </div>
       </div>
     </nav>
@@ -467,14 +512,20 @@
 
     <footer class="footer mt-5">
       <div class="container">
-        <p class="copy-right">
+        <div class="footer__content text-center">
+          <p class="copy-right mb-2">
             All rights reserved &copy; <span class="logo">Abid Rafiq Academy for the Quran</span>
-        </p>
+          </p>
+          <div class="whatsapp-footer">
+            <a href="https://wa.me/923497469638" target="_blank" style="color: #25D366; font-size: 1.5rem; text-decoration: none; font-weight: bold; direction: ltr; display: inline-block;">
+              <i class="fa fa-whatsapp"></i> WhatsApp: +92 349 7469638
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
 
-    <script src="js/zoom.js"></script>
-    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/zoom.js"></script>
     <script src="js/main.js"></script>
     <script>
@@ -544,7 +595,7 @@
             document.documentElement.setAttribute('dir', data.dir);
 
             document.getElementById('main-title').innerText = data.title;
-            document.getElementById('back-text').innerText = data.back;
+            // document.getElementById('back-text').innerText = data.back; // Removed as it was missing in HTML
             document.getElementById('qaida-tab').innerText = data.qaidaTab;
             document.getElementById('dua-tab').innerText = data.duaTab;
             document.getElementById('nimaz-tab').innerText = data.nimazTab;

@@ -166,6 +166,7 @@ const translations = {
         'send': 'Send',
         'footer': 'All rights reserved © Abid Rafiq Academy for the Quran',
         'lang_btn': '<i class="fa fa-globe"></i> Language',
+        'lessons': 'Basic Lessons',
         'dir': 'ltr'
     },
     'ar': {
@@ -174,6 +175,7 @@ const translations = {
         'prog': 'البرامج',
         'whous': 'من نحن',
         'contact': 'تواصل معنا',
+        'lessons': 'الدروس الأساسية',
         'hero_h1': 'أكاديمية تربوية تعليمية',
         'hero_p': 'تهدف إلى تعليم القرآن الكريم و مهارات التجويد',
         'register': 'للتسجيل اضغط هنا',
@@ -230,6 +232,7 @@ const translations = {
         'send': 'بھیجیں',
         'footer': 'جملہ حقوق محفوظ ہیں © عابد رفیق قرآن اکیڈمی',
         'lang_btn': '<i class="fa fa-globe"></i> زبان',
+        'lessons': 'بنیادی اسباق',
         'dir': 'rtl'
     }
 };
@@ -250,13 +253,16 @@ function changeLanguage(lang) {
     const loginBtn = document.querySelector('a[href="login.php"]');
     if (loginBtn) loginBtn.innerText = data.login;
 
-    const progLink = document.querySelector('a[href="#prog"]');
+    const progLink = document.querySelector('a[href="#prog"], a[href="index.html#prog"]');
     if (progLink) progLink.innerText = data.prog;
 
-    const whoLink = document.querySelector('a[href="#whous"]');
+    const whoLink = document.querySelector('a[href="#whous"], a[href="index.html#whous"]');
     if (whoLink) whoLink.innerText = data.whous;
 
-    const contactLink = document.querySelector('a[href="#contactus"]');
+    const navLessons = document.getElementById('nav-lessons');
+    if (navLessons) navLessons.innerText = data.lessons;
+
+    const contactLink = document.querySelector('a[href="#contactus"], a[href="index.html#contactus"]');
     if (contactLink) contactLink.innerText = data.contact;
 
     const heroH1 = document.querySelector('.hero h1');
@@ -303,6 +309,9 @@ function changeLanguage(lang) {
 
     document.querySelector('.copy-right').innerHTML = data.footer;
     document.querySelector('.lang-btn').innerHTML = data.lang_btn;
+
+    // Dispatch custom event for page-specific scripts
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
 
     // Save preference
     localStorage.setItem('preferredLang', lang);
