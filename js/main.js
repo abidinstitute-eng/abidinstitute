@@ -134,45 +134,6 @@ span.onclick = () => {
   window.scrollTo(0, 0);
 };
 
-// === Zoom Functionality === //
-let currentZoomLevel = 1;
-function adjustZoom(factor) {
-    currentZoomLevel *= factor;
-    if (currentZoomLevel > 2) currentZoomLevel = 2;
-    if (currentZoomLevel < 0.8) currentZoomLevel = 0.8;
-    applyZoom();
-}
-function resetZoom() {
-    currentZoomLevel = 1;
-    applyZoom();
-}
-function applyZoom() {
-    document.body.style.zoom = currentZoomLevel;
-    // Fallback for browsers that don't support zoom property
-    if (typeof document.body.style.zoom === "undefined") {
-        document.documentElement.style.transform = `scale(${currentZoomLevel})`;
-        document.documentElement.style.transformOrigin = "top center";
-    }
-}
-
-// Inject Zoom Controls into the page
-document.addEventListener('DOMContentLoaded', () => {
-    const zoomDiv = document.createElement('div');
-    zoomDiv.className = 'zoom-controls';
-    zoomDiv.innerHTML = `
-        <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
-            <i class="fa fa-search-plus"></i>
-        </button>
-        <button class="zoom-btn" onclick="adjustZoom(0.9)" title="Zoom Out">
-            <i class="fa fa-search-minus"></i>
-        </button>
-        <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
-            <i class="fa fa-refresh"></i>
-        </button>
-    `;
-    document.body.appendChild(zoomDiv);
-});
-
 // === Language Switcher === //
 const translations = {
     'en': {
@@ -180,12 +141,10 @@ const translations = {
         'login': 'Login',
         'prog': 'Programs',
         'whous': 'Who we are',
-        'lessons': 'Basic Lessons',
         'contact': 'Contact us',
         'hero_h1': 'Educational Quranic Academy',
         'hero_p': 'Aiming to teach the Holy Quran and Tajweed skills',
         'register': 'Register Here',
-        'lessons_btn': 'BASIC LESSONS',
         'who_h3': 'Who we are',
         'who_p': 'Abid Rafiq Quran Academy is a premier global platform dedicated to the spiritual and linguistic mastery of the Holy Quran. Our curriculum is meticulously designed to cover Hifz (Memorization), Tajweed (Rules of Recitation), and Tafsir (Interpretation). Guided by the expertise of distinguished mentors, we provide a bridge to the Arabic language, enabling students of all ages to connect deeply with the Divine Message. We are committed to excellence, ensuring every learner achieves a beautiful and precise recitation from adept mentors.',
         'years': 'All Ages',
@@ -205,7 +164,6 @@ const translations = {
         'message_label': 'Message',
         'message_placeholder': 'Write your message here',
         'send': 'Send',
-        'success_msg': 'YOUR MESSAGE HAS BEEN SENT SUCCESSFULLY!',
         'footer': 'All rights reserved © Abid Rafiq Academy for the Quran',
         'lang_btn': '<i class="fa fa-globe"></i> Language',
         'dir': 'ltr'
@@ -215,12 +173,10 @@ const translations = {
         'login': 'تسجيل الدخول',
         'prog': 'البرامج',
         'whous': 'من نحن',
-        'lessons': 'الدروس الأساسية',
         'contact': 'تواصل معنا',
         'hero_h1': 'أكاديمية تربوية تعليمية',
         'hero_p': 'تهدف إلى تعليم القرآن الكريم و مهارات التجويد',
         'register': 'للتسجيل اضغط هنا',
-        'lessons_btn': 'الدروس الأساسية',
         'who_h3': 'من نحن',
         'who_p': 'تعد أكاديمية عابد رفيق للقرآن منصة عالمية رائدة مخصصة للإتقان الروحی واللغوی للقرآن الکریم. تم تصميم منهجنا بدقة ليغطی الحفظ والتجويد والتفسير. تحت إشراف نخبة من المعلمين المتميزين، نوفر جسراً لتعلم اللغة العربية، مما يمكّن الطلاب من جميع الأعمار من الاتصال بعمق مع الرسالة الإلهية. نحن ملتزمون بالتميز، وضمان تحقيق كل متعلم لتلاوة متقنة وجميلة على يد مرشدين ماهرين.',
         'years': 'جميع الأعمار',
@@ -240,7 +196,6 @@ const translations = {
         'message_label': 'الرسالة',
         'message_placeholder': 'اكتب رسالتك هنا',
         'send': 'أرسل',
-        'success_msg': 'تم إرسال رسالتك بنجاح!',
         'footer': 'جميع الحقوق محفوظة © أكاديمية عابد رفيق للقرآن',
         'lang_btn': '<i class="fa fa-globe"></i> اللغة',
         'dir': 'rtl'
@@ -250,12 +205,10 @@ const translations = {
         'login': 'لاگ ان کریں',
         'prog': 'پروگرام',
         'whous': 'ہمارے بارے میں',
-        'lessons': 'بنیادی اسباق',
         'contact': 'ہم سے رابطہ کریں',
         'hero_h1': 'ایک تعلیمی قرآنی اکیڈمی',
         'hero_p': 'جس کا مقصد قرآن مجید اور تجوید کی مہارتیں سکھانا ہے',
         'register': 'رجسٹریشن کے لیے یہاں کلک کریں',
-        'lessons_btn': 'بنیادی اسباق',
         'who_h3': 'ہمارے بارے میں',
         'who_p': 'عابد رفیق قرآن اکیڈمی ایک ممتاز عالمی پلیٹ فارم ہے جو قرآن کریم کی روحانی اور لسانی مہارت کے لیے وقف ہے۔ ہمارا نصاب حفظ، تجوید اور تفسیر کے جامع احاطہ کے لیے ڈیزائن کیا گیا ہے۔ نامور اساتذہ کی زیر نگرانی، ہم عربی زبان سیکھنے کے لیے ایک بہترین ذریعہ فراہم کرتے ہیں، تاکہ تمام عمر کے طلباء الہی پیغام کے ساتھ گہرائی سے جڑ سکیں۔ ہم بہترین معیار کے پابند ہیں، اس بات کو یقینی بناتے ہوئے کہ ہر طالب علم ماہر اساتذہ سے سنت کے مطابق خوبصورت اور درست تلاوت حاصل کرے۔',
         'years': 'تمام عمر',
@@ -275,7 +228,6 @@ const translations = {
         'message_label': 'پیغام',
         'message_placeholder': 'اپنا پیغام یہاں لکھیں',
         'send': 'بھیجیں',
-        'success_msg': 'آپ کا پیغام کامیابی کے ساتھ بھیج دیا گیا ہے!',
         'footer': 'جملہ حقوق محفوظ ہیں © عابد رفیق قرآن اکیڈمی',
         'lang_btn': '<i class="fa fa-globe"></i> زبان',
         'dir': 'rtl'
@@ -292,22 +244,19 @@ function changeLanguage(lang) {
 
     // Update Content
     document.title = data.brand;
-    const navTitle = document.getElementById('nav-title') || document.getElementById('nav-brand-text');
+    const navTitle = document.getElementById('nav-title');
     if (navTitle) navTitle.innerText = data.brand;
 
     const loginBtn = document.querySelector('a[href="login.php"]');
     if (loginBtn) loginBtn.innerText = data.login;
 
-    const progLink = document.querySelector('a[href="#prog"], a[href="index.html#prog"]');
+    const progLink = document.querySelector('a[href="#prog"]');
     if (progLink) progLink.innerText = data.prog;
 
-    const whoLink = document.querySelector('a[href="#whous"], a[href="index.html#whous"]');
+    const whoLink = document.querySelector('a[href="#whous"]');
     if (whoLink) whoLink.innerText = data.whous;
 
-    const lessonsLink = document.getElementById('nav-lessons');
-    if (lessonsLink) lessonsLink.innerText = data.lessons;
-
-    const contactLink = document.querySelector('a[href="#contactus"], a[href="index.html#contactus"]');
+    const contactLink = document.querySelector('a[href="#contactus"]');
     if (contactLink) contactLink.innerText = data.contact;
 
     const heroH1 = document.querySelector('.hero h1');
@@ -316,11 +265,8 @@ function changeLanguage(lang) {
     const heroP = document.querySelector('.hero p');
     if (heroP) heroP.innerText = data.hero_p;
 
-    const heroBtn = document.querySelector('.hero .btn[href*="wa.me"]');
+    const heroBtn = document.querySelector('.hero .btn');
     if (heroBtn) heroBtn.innerText = data.register;
-
-    const heroLessonsBtn = document.getElementById('hero-lessons-btn');
-    if (heroLessonsBtn) heroLessonsBtn.innerText = data.lessons_btn;
 
     const whoH3 = document.getElementById('whous');
     if (whoH3) whoH3.innerText = data.who_h3;
@@ -343,44 +289,23 @@ function changeLanguage(lang) {
     goalHeadings[2].innerText = data.goal3_h4;
     goalContents[2].innerText = data.goal3_p;
 
-    const contactHeading = document.querySelector('.contact .section-heading');
-    if (contactHeading) contactHeading.innerText = data.contact_h3;
+    document.querySelector('.contact .section-heading').innerText = data.contact_h3;
 
     // Update Address and Phone
     if(document.getElementById('contact-address')) document.getElementById('contact-address').innerText = data.address;
     if(document.getElementById('contact-phone')) document.getElementById('contact-phone').innerText = data.phone;
 
-    const nameLabel = document.querySelector('label[for="name"]');
-    if (nameLabel) nameLabel.innerText = data.name_label;
+    document.querySelector('label[for="name"]').innerText = data.name_label;
+    document.querySelector('label[for="email"]').innerText = data.email_label;
+    document.querySelector('label[for="textarea"]').innerText = data.message_label;
+    document.getElementById('textarea').placeholder = data.message_placeholder;
+    document.querySelector('.contact .btn').innerText = data.send;
 
-    const emailLabel = document.querySelector('label[for="email"]');
-    if (emailLabel) emailLabel.innerText = data.email_label;
-
-    const messageLabel = document.querySelector('label[for="textarea"]');
-    if (messageLabel) messageLabel.innerText = data.message_label;
-
-    const textarea = document.getElementById('textarea');
-    if (textarea) textarea.placeholder = data.message_placeholder;
-
-    const contactBtn = document.querySelector('.contact .btn');
-    if (contactBtn) contactBtn.innerText = data.send;
-
-    const successMsgText = document.getElementById('formSuccess');
-    if (successMsgText) successMsgText.innerText = data.success_msg;
-
-    const footerElem = document.querySelector('.copy-right');
-    if (footerElem) footerElem.innerHTML = data.footer;
-
-    const langBtn = document.getElementById('main-lang-btn') || document.querySelector('.lang-btn');
-    if (langBtn) langBtn.innerHTML = data.lang_btn;
+    document.querySelector('.copy-right').innerHTML = data.footer;
+    document.querySelector('.lang-btn').innerHTML = data.lang_btn;
 
     // Save preference
     localStorage.setItem('preferredLang', lang);
-
-    // If on basic-lessons.html, call its specific language handler
-    if (typeof setPageLanguage === 'function') {
-        setPageLanguage(lang);
-    }
 }
 
 // Event Listeners for links

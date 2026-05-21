@@ -213,35 +213,6 @@
             font-size: 1.1rem;
             letter-spacing: 1px;
         }
-        /* Accessibility Zoom Button */
-        .zoom-controls {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .zoom-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            transition: 0.3s;
-        }
-        .zoom-btn:hover {
-            transform: scale(1.1);
-            background: var(--color-secondary);
-        }
         [dir="ltr"] .dua-content, [dir="ltr"] .nimaz-content {
             text-align: left;
         }
@@ -340,67 +311,28 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary py-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg py-3">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="index.html">
-          <img src="img/logo.png" alt="Logo" style="height: 60px; margin-inline-end: 15px; display: inline-block !important; visibility: visible !important;">
-          <span id="nav-brand-text" class="d-none d-sm-inline" style="color: var(--color-secondary); font-weight: bold; font-size: 1.5rem;">Abid Rafiq Academy</span>
+          <img src="img/logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+          <span class="d-none d-sm-inline" style="color: var(--color-secondary); font-weight: bold;">Abid Rafiq Academy</span>
         </a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html#prog">البرامج</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html#whous">من نحن</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="basic-lessons.html" id="nav-lessons">الدروس الأساسية</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html#contactus">تواصل معنا</a>
-            </li>
-          </ul>
-
-          <div class="d-flex align-items-center">
-            <div class="lang-dropdown ms-lg-3">
-              <button class="lang-btn" id="main-lang-btn">
-                 <i class="fa fa-globe"></i> اللغة
-              </button>
-              <div class="lang-content">
-                <a href="?lang=en">English</a>
-                <a href="?lang=ur">اردو</a>
-                <a href="?lang=ar">العربية</a>
-              </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="navbar-lang-switcher">
+                <button class="lang-btn" onclick="setPageLanguage('ar')">AR</button>
+                <button class="lang-btn" onclick="setPageLanguage('ur')">UR</button>
+                <button class="lang-btn" onclick="setPageLanguage('en')">EN</button>
             </div>
-            <a href="index.html" class="btn btn-outline-secondary ms-3 d-none d-lg-inline-block" style="border-radius: 50px; font-weight: bold;">
-                <i class="fa fa-home"></i>
+            <a href="index.html" class="back-home" id="btn-back">
+                <i class="fa fa-home"></i> <span id="back-text">BACK TO HOME</span>
             </a>
-          </div>
         </div>
       </div>
     </nav>
 
-    <div class="container mt-4">
-        <a href="index.html" class="back-home mb-3" id="back-link">
-            <i class="fa fa-arrow-left"></i> <span id="back-text">BACK TO HOME</span>
-        </a>
-    </div>
-
-    <div class="container mt-2">
+    <div class="container mt-5">
         <h1 class="text-center mb-5" id="main-title" style="color: var(--color-secondary); font-weight: 800;">Basic Islamic Lessons</h1>
 
         <ul class="nav nav-tabs justify-content-center mb-4" id="lessonTabs" role="tablist">
@@ -543,6 +475,8 @@
 
     <script src="js/zoom.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/zoom.js"></script>
+    <script src="js/main.js"></script>
     <script>
         // --- Shared Logic ---
         const pageTranslations = {
@@ -609,32 +543,15 @@
             document.documentElement.setAttribute('lang', lang);
             document.documentElement.setAttribute('dir', data.dir);
 
-            const mainTitle = document.getElementById('main-title');
-            if (mainTitle) mainTitle.innerText = data.title;
-
-            const backText = document.getElementById('back-text');
-            if (backText) backText.innerText = data.back;
-
-            const qaidaTab = document.getElementById('qaida-tab');
-            if (qaidaTab) qaidaTab.innerText = data.qaidaTab;
-
-            const duaTab = document.getElementById('dua-tab');
-            if (duaTab) duaTab.innerText = data.duaTab;
-
-            const nimazTab = document.getElementById('nimaz-tab');
-            if (nimazTab) nimazTab.innerText = data.nimazTab;
-
-            const adhkarTab = document.getElementById('adhkar-tab');
-            if (adhkarTab) adhkarTab.innerText = data.adhkarTab;
-
-            const quranTab = document.getElementById('quran-tab');
-            if (quranTab) quranTab.innerText = data.quranTab;
-
-            const qaidaTitle = document.getElementById('qaida-title');
-            if (qaidaTitle) qaidaTitle.innerText = data.qaidaTitle;
-
-            const quranTitle = document.getElementById('quran-title');
-            if (quranTitle) quranTitle.innerText = data.quranTitle;
+            document.getElementById('main-title').innerText = data.title;
+            document.getElementById('back-text').innerText = data.back;
+            document.getElementById('qaida-tab').innerText = data.qaidaTab;
+            document.getElementById('dua-tab').innerText = data.duaTab;
+            document.getElementById('nimaz-tab').innerText = data.nimazTab;
+            document.getElementById('adhkar-tab').innerText = data.adhkarTab;
+            document.getElementById('quran-tab').innerText = data.quranTab;
+            document.getElementById('qaida-title').innerText = data.qaidaTitle;
+            document.getElementById('quran-title').innerText = data.quranTitle;
 
             // Update Adhkar Filter Buttons
             const modeBtns = document.querySelectorAll('#adhkar-mode-control .lang-btn');
@@ -648,8 +565,7 @@
             const footerText = lang === 'ar' ? 'جميع الحقوق محفوظة © أكاديمية عابد رفيق للقرآن' :
                                (lang === 'ur' ? 'جملہ حقوق محفوظ ہیں © عابد رفیق قرآن اکیڈمی' :
                                'All rights reserved &copy; Abid Rafiq Academy for the Quran');
-            const copyRightElem = document.querySelector('.copy-right');
-            if (copyRightElem) copyRightElem.innerHTML = footerText;
+            document.querySelector('.copy-right').innerHTML = footerText;
 
             document.querySelectorAll('.navbar-lang-switcher .lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.innerText.trim().toLowerCase() === lang);
