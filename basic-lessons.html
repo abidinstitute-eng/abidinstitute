@@ -43,43 +43,226 @@
             background-color: white !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .gallery-container, .viewer-container {
-            max-width: 1000px;
-            margin: 20px auto;
+        .gallery-container {
+            max-width: 98%;
+            margin: 5px auto;
             text-align: center;
             background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-        @media (max-width: 768px) {
-            .gallery-container, .viewer-container {
-                padding: 15px;
-                margin: 10px;
-            }
-            .gallery-img-wrapper {
-                padding: 5px;
-                min-height: auto;
-            }
-        }
-        .gallery-img-wrapper, .dua-wrapper {
-            position: relative;
-            background: #f9f9f9;
             padding: 20px;
+            border-radius: 40px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.18);
+        }
+
+        /* Side-by-side layout optimized for MASSIVE content */
+        .viewer-main-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .side-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 2px solid #ddd;
+            max-height: 98vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        .side-controls::-webkit-scrollbar {
+            width: 8px;
+        }
+        .side-controls::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
             border-radius: 10px;
-            margin-bottom: 25px;
-            min-height: 300px;
+        }
+
+        .viewer-content-area {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            min-width: 0;
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 40px;
+            border: 2px solid #eee;
+            overflow-x: hidden; /* Prevent horizontal scroll from massive text */
         }
+
+        @media (max-width: 1600px) {
+            .nav-tabs .nav-link {
+                font-size: 6rem;
+                padding: 40px 80px;
+                min-width: 350px;
+            }
+            .text-arabic { font-size: 8rem; }
+            .text-translation { font-size: 5rem; }
+            .step-title { font-size: 6rem; }
+            .tool-btn { width: 120px; height: 120px; font-size: 4rem; }
+        }
+
+        @media (max-width: 1400px) {
+            .viewer-main-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .side-controls {
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+            .tools-panel {
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-tabs .nav-link {
+                font-size: 4rem;
+                padding: 30px 60px;
+                min-width: 300px;
+            }
+            .text-arabic { font-size: 6rem; }
+            .text-translation { font-size: 4rem; }
+            .step-title { font-size: 4rem; }
+        }
+
+        @media (max-width: 1100px) {
+            .text-arabic { font-size: 5rem; }
+            .text-translation { font-size: 3.5rem; }
+            .step-title { font-size: 3rem; }
+            .tool-btn { width: 90px; height: 90px; font-size: 3rem; }
+        }
+
+        /* Tools Panel Scaling - HUGE */
+        .tools-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 12px 45px rgba(0,0,0,0.12);
+            border: 8px solid var(--color-primary);
+        }
+        .tool-btn {
+            width: 160px;
+            height: 160px;
+            border-radius: 35px;
+            border: 6px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 5.5rem;
+            background: #fff;
+            color: var(--color-secondary);
+            font-weight: 900;
+        }
+        .tool-btn:hover {
+            transform: scale(1.1) rotate(3deg);
+            border-color: var(--color-primary);
+        }
+        .tool-btn.active {
+            border-color: var(--color-secondary);
+            background: var(--color-primary);
+            color: white !important;
+            transform: scale(1.15);
+            box-shadow: 0 15px 35px rgba(186, 153, 46, 0.4);
+        }
+        .tool-btn.active i {
+            color: white !important;
+        }
+        .color-red { color: #ff4444; }
+        .color-green { color: #00c851; }
+        .color-blue { color: #33b5e5; }
+
+        .canvas-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+            touch-action: none;
+        }
+        #drawing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+
+        /* Magnifier Glass */
+        .magnifier {
+            position: absolute;
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: none;
+            width: 200px;
+            height: 200px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            pointer-events: none;
+            background-repeat: no-repeat;
+        }
+
+        .gallery-img-wrapper {
+            overflow: visible !important;
+        }
+
+        /* Responsive adjustments for tools */
+        @media (max-width: 768px) {
+            .tools-panel {
+                gap: 10px;
+                padding: 15px;
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .tool-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5rem;
+                border-radius: 15px;
+                border-width: 3px;
+            }
+            .side-controls {
+                position: static !important;
+                width: 100% !important;
+                margin-bottom: 20px;
+                padding: 15px;
+            }
+        }
+
         .gallery-img {
             max-width: 100%;
             max-height: 80vh;
             height: auto;
             border: 1px solid #eee;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: min-width 0.3s ease;
+        }
+        .massive-img {
+            min-width: 800px;
+        }
+        @media (max-width: 850px) {
+            .massive-img {
+                min-width: 100%;
+            }
         }
         .btn-custom {
             background-color: var(--color-primary);
@@ -110,17 +293,29 @@
         }
         .nav-tabs .nav-link {
             border: none;
-            color: #666;
-            font-weight: 700;
-            padding: 15px 25px;
-            border-radius: 10px;
-            background: #eee;
-            transition: 0.3s;
-            font-size: 1.2rem;
+            color: #444;
+            font-weight: 950;
+            padding: 60px 120px;
+            border-radius: 50px;
+            background: #ffffff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 9rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            text-transform: uppercase;
+            margin: 30px;
+            text-align: center;
+            min-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid #eee;
         }
         .nav-tabs .nav-link.active {
             background-color: var(--color-primary) !important;
             color: white !important;
+            transform: scale(1.1) translateY(-15px);
+            box-shadow: 0 35px 70px rgba(186, 153, 46, 0.7);
+            border-color: var(--color-secondary);
         }
         .content-section {
             padding: 20px 0;
@@ -134,20 +329,35 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
-        .lang-btn {
-            border: 1px solid #ddd;
+        .lang-control .lang-btn {
+            border: 5px solid var(--color-primary);
             background: white;
-            padding: 8px 25px;
-            border-radius: 20px;
+            padding: 25px 90px;
+            border-radius: 60px;
             cursor: pointer;
-            transition: 0.3s;
-            font-weight: bold;
-            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-weight: 900;
+            font-size: 4.8rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            margin: 15px;
+            color: var(--color-secondary);
+            min-width: 250px;
         }
-        .lang-btn.active {
+        .lang-control .lang-btn.active {
             background: var(--color-primary);
             color: white;
             border-color: var(--color-primary);
+            transform: scale(1.15);
+            box-shadow: 0 20px 40px rgba(186, 153, 46, 0.5);
+        }
+        .lang-control .lang-btn:hover:not(.active) {
+            background-color: #f8f9fa;
+            border-color: var(--color-secondary);
+            transform: translateY(-3px);
+        }
+        .lang-btn {
+            /* Navbar style reset/override if needed, but let's keep it distinct */
+            font-family: 'Tajawal', sans-serif;
         }
         .dua-content, .nimaz-content {
             direction: rtl;
@@ -163,26 +373,39 @@
         }
         .text-arabic {
             font-family: 'Amiri', serif;
-            font-size: 4rem;
+            font-size: 11rem;
             color: var(--color-secondary);
-            margin-bottom: 20px;
-            line-height: 1.8;
+            margin-bottom: 40px;
+            line-height: 1.4;
             text-align: center;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            width: 100%;
         }
         .text-translation {
-            font-size: 2.8rem;
-            color: #444;
-            font-weight: 500;
+            font-size: 6.5rem;
+            color: #111;
+            font-weight: 900;
             text-align: center;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .step-title {
             color: var(--color-primary);
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 3.2rem;
+            font-weight: 950;
+            margin-bottom: 40px;
+            font-size: 8rem;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 30px;
         }
         /* Enhanced Page Jump Styling */
         .page-jump-box {
@@ -250,58 +473,186 @@
             display: flex;
             gap: 5px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 991px) {
             .nav-tabs .nav-link {
-                padding: 10px 12px;
-                font-size: 1.1rem;
-            }
-            .lang-btn {
-                padding: 6px 15px;
-                font-size: 1.1rem;
+                font-size: 2.5rem !important;
+                padding: 20px 30px !important;
+                min-width: calc(50% - 20px) !important;
+                margin: 10px !important;
+                border-radius: 20px !important;
             }
             .text-arabic {
-                font-size: 2.8rem;
+                font-size: 4rem !important;
             }
             .text-translation {
-                font-size: 1.8rem;
-            }
-            .btn-custom {
-                padding: 10px 20px;
-                min-width: 100px;
-                font-size: 1.1rem;
-            }
-            .step-title {
-                font-size: 2rem;
-            }
-            .lang-control {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                font-size: 2.5rem !important;
             }
         }
-        @media (max-width: 576px) {
-            .navbar .container {
-                flex-direction: column;
-                gap: 15px;
+
+        @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+                padding-right: 0;
+                overflow-x: hidden;
+                width: 100%;
             }
-            .navbar-lang-switcher {
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                margin: 0 auto !important;
+            }
+            .gallery-container {
+                padding: 15px;
+                border-radius: 25px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                width: 100% !important;
+                margin: 10px 0;
+            }
+            .viewer-content-area {
+                padding: 20px;
+                border-radius: 25px;
+                width: 100%;
+                border-width: 1px;
+            }
+            .nav-tabs {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
                 justify-content: center;
-            }
-            .text-arabic {
-                font-size: 2.2rem;
-            }
-            .text-translation {
-                font-size: 1.5rem;
-            }
-            .step-title {
-                font-size: 1.8rem;
+                border: none;
             }
             .nav-tabs .nav-link {
-                font-size: 0.9rem;
-                padding: 8px 10px;
+                padding: 15px 10px !important;
+                font-size: 1.8rem !important;
+                border-radius: 15px !important;
+                margin: 5px !important;
+                min-width: calc(50% - 10px) !important;
+                max-width: 100%;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+                border: 3px solid #eee !important;
+                transform: none !important;
+                height: auto !important;
+                line-height: 1.2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
-            .dua-card, .nimaz-card {
+            .nav-tabs .nav-link.active {
+                transform: scale(1.02) !important;
+                border-color: var(--color-primary) !important;
+                background-color: var(--color-primary) !important;
+                color: white !important;
+                box-shadow: 0 8px 20px rgba(186, 153, 46, 0.4) !important;
+            }
+            .lang-control .lang-btn {
+                padding: 12px 25px;
+                font-size: 1.8rem !important;
+                margin: 5px;
+                border-width: 3px;
+                min-width: 110px !important;
+                border-radius: 30px !important;
+            }
+            .text-arabic {
+                font-size: 3.5rem !important;
+                line-height: 1.6;
+                margin-bottom: 25px;
+                word-wrap: break-word;
+            }
+            .text-translation {
+                font-size: 2.2rem !important;
+                line-height: 1.4;
+                margin-bottom: 25px;
+                word-wrap: break-word;
+            }
+            .step-title {
+                font-size: 2.4rem !important;
                 padding: 15px;
+                margin-bottom: 25px;
+                border-radius: 20px;
+            }
+            .btn-custom {
+                padding: 15px 25px !important;
+                font-size: 1.8rem !important;
+                border-radius: 35px !important;
+                min-width: 130px !important;
+            }
+            .page-jump-box {
+                padding: 10px 20px;
+                margin: 15px 0;
+                width: 100%;
+                justify-content: center;
+            }
+            .page-jump-box span, .page-jump-box input {
+                font-size: 2rem !important;
+            }
+            .page-input-field {
+                width: 70px !important;
+            }
+            .canvas-container {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            .gallery-img {
+                max-height: 70vh;
+                width: 100%;
+                object-fit: contain;
+            }
+            .massive-img {
+                min-width: 100% !important;
+            }
+            #dua-counter, .counter-badge {
+                font-size: 2rem !important;
+                padding: 10px 25px !important;
+                margin-bottom: 20px;
+            }
+            .juz-selection-panel {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)) !important;
+                gap: 10px !important;
+                padding: 15px !important;
+                max-height: 300px !important;
+                overflow-y: auto !important;
+                background: #f8f9fa !important;
+                border: 4px solid var(--color-primary) !important;
+            }
+            .juz-selection-panel .tool-btn {
+                width: 100% !important;
+                height: 55px !important;
+                font-size: 1.4rem !important;
+                border-radius: 15px !important;
+                border-width: 2px !important;
+            }
+            #tajweed-iframe {
+                height: 70vh !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-tabs .nav-link {
+                min-width: 100% !important;
+                font-size: 1.6rem !important;
+                padding: 12px 10px !important;
+            }
+            .container {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+            .navbar-brand img {
+                height: 45px !important;
+            }
+            .text-arabic {
+                font-size: 2.8rem !important;
+            }
+            .text-translation {
+                font-size: 1.8rem !important;
+            }
+            .tool-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
             }
         }
         /* Hide number input arrows */
@@ -385,7 +736,7 @@
                 <button class="nav-link active" id="qaida-tab" data-bs-toggle="tab" data-bs-target="#qaida" type="button" role="tab">NOORANI QAEEDHA</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="dua-tab" data-bs-toggle="tab" data-bs-target="#dua" type="button" role="tab">DUA MASNOON 50</button>
+                <button class="nav-link" id="dua-tab" data-bs-toggle="tab" data-bs-target="#dua" type="button" role="tab">50+ MASNOON DUA</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="nimaz-tab" data-bs-toggle="tab" data-bs-target="#nimaz" type="button" role="tab">NIMAZ COMPLETE</button>
@@ -396,32 +747,77 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="quran-tab" data-bs-toggle="tab" data-bs-target="#quran" type="button" role="tab">HOLY QURAN</button>
             </li>
+            <!-- <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tajweed-tab" data-bs-toggle="tab" data-bs-target="#tajweed" type="button" role="tab">TAJWEEDH QURAN</button>
+            </li> -->
         </ul>
 
         <div class="tab-content" id="lessonTabsContent">
             <!-- Noorani Qaida Tab -->
             <div class="tab-pane fade show active" id="qaida" role="tabpanel">
                 <div class="gallery-container">
-                    <h2 class="mb-4" id="qaida-title" style="color: var(--color-secondary);">Noorani Qaida Viewer</h2>
-                    <div class="gallery-img-wrapper">
-                        <img id="qaida-img" src="NOORAI QEEDHA/noorani_qaida_page-0001.jpg" alt="Noorani Qaida Page" class="gallery-img">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center px-md-5 flex-wrap gap-3">
-                        <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida">
-                            <i class="fa fa-chevron-left"></i> Previous
-                        </button>
+                    <h2 class="mb-4" id="qaida-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Noorani Qaida Viewer</h2>
 
-                        <div class="page-jump-box">
-                            <span id="page-text-label">Page</span>
-                            <input type="number" id="page-input" value="1" min="1" max="31"
-                                   title="Type page number and press Enter"
-                                   class="page-input-field">
-                            <span class="page-total">/ 31</span>
+                    <div class="viewer-main-layout">
+                        <!-- Side Panel for Tools & Languages -->
+                        <div class="side-controls">
+                            <!-- Languages -->
+                            <div class="tools-panel" style="border-color: var(--color-secondary);">
+                                <button class="tool-btn active" id="qaida-lang-ur" onclick="setQaidaLang('ur', this)" title="Urdu" style="font-size: 2rem; font-weight: 900;">اردو</button>
+                                <button class="tool-btn" id="qaida-lang-en" onclick="setQaidaLang('en', this)" title="English" style="font-size: 1.5rem; font-weight: 900;">ENG</button>
+                            </div>
+
+                            <!-- Drawing Tools -->
+                            <div class="tools-panel">
+                                <div class="tool-btn active" onclick="setTool('pen', 'red', this)" title="Red Pen">
+                                    <i class="fa fa-pencil color-red"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('pen', 'green', this)" title="Green Pen">
+                                    <i class="fa fa-pencil color-green"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('pen', 'blue', this)" title="Blue Pen">
+                                    <i class="fa fa-pencil color-blue"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('eraser', null, this)" title="Eraser">
+                                    <i class="fa fa-eraser"></i>
+                                </div>
+                                <div class="tool-btn" onclick="clearCanvas()" title="Clear All">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                                <div class="tool-btn" id="magnifier-toggle" onclick="toggleMagnifier(this)" title="Optical Glass (Magnify)">
+                                    <i class="fa fa-search-plus"></i>
+                                </div>
+                            </div>
                         </div>
 
-                        <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida">
-                            Next <i class="fa fa-chevron-right"></i>
-                        </button>
+                        <!-- Main Viewer -->
+                        <div class="viewer-content-area">
+                            <div class="gallery-img-wrapper">
+                                <div class="canvas-container" id="qaida-container">
+                                    <img id="qaida-img" src="NOORAI QEEDHA/noorani_qaida_page-0001.jpg" alt="Noorani Qaida Page" class="gallery-img massive-img">
+                                    <canvas id="drawing-canvas"></canvas>
+                                    <div id="magnifier-lens" class="magnifier"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-chevron-left"></i> Previous
+                                </button>
+
+                                <div class="page-jump-box" style="padding: 15px 40px; border-width: 4px;">
+                                    <span id="page-text-label" style="font-size: 2.5rem;">Page</span>
+                                    <input type="number" id="page-input" value="1" min="1" max="31"
+                                           title="Type page number and press Enter"
+                                           class="page-input-field" style="font-size: 3rem; width: 100px;">
+                                    <span class="page-total" style="font-size: 2.5rem;">/ 31</span>
+                                </div>
+
+                                <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -429,25 +825,30 @@
 
             <!-- Dua Masnoon Tab -->
             <div class="tab-pane fade" id="dua" role="tabpanel">
-                <div class="content-section text-center">
-                    <div class="lang-control">
-                        <button class="lang-btn" data-lang="ar" onclick="setDuaLang('ar', this)">العربية</button>
-                        <button class="lang-btn active" data-lang="ur" onclick="setDuaLang('ur', this)">اردو</button>
-                        <button class="lang-btn" data-lang="en" onclick="setDuaLang('en', this)">English</button>
-                    </div>
-
-                    <div class="viewer-container">
-                        <div class="counter-badge" id="dua-counter">Dua 1 / 50</div>
-                        <div class="dua-wrapper" id="dua-display">
-                            <!-- Dua content injected here -->
+                <div class="gallery-container">
+                    <h2 class="mb-4" id="dua-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">50+ Masnoon Dua</h2>
+                    <div class="viewer-main-layout">
+                        <div class="side-controls">
+                            <div class="tools-panel" style="border-color: var(--color-secondary);">
+                                <button class="tool-btn" data-lang="ar" onclick="setDuaLang('ar', this)" style="font-size: 1.5rem;">عربی</button>
+                                <button class="tool-btn active" data-lang="ur" onclick="setDuaLang('ur', this)" style="font-size: 1.8rem;">اردو</button>
+                                <button class="tool-btn" data-lang="en" onclick="setDuaLang('en', this)" style="font-size: 1.5rem;">ENG</button>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center px-md-5">
-                            <button class="btn btn-custom" onclick="prevDua()" id="btn-prev-dua">
-                                <i class="fa fa-chevron-right"></i> Previous
-                            </button>
-                            <button class="btn btn-custom" onclick="nextDua()" id="btn-next-dua">
-                                Next <i class="fa fa-chevron-left"></i>
-                            </button>
+
+                        <div class="viewer-content-area">
+                            <div class="counter-badge" id="dua-counter" style="font-size: 2.5rem; padding: 10px 30px; border-radius: 40px;">Dua 1 / 50</div>
+                            <div class="dua-wrapper" id="dua-display" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
+                                <!-- Dua content injected here -->
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center w-100 px-md-5 mt-5">
+                                <button class="btn btn-custom" onclick="prevDua()" id="btn-prev-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-chevron-right"></i> Previous
+                                </button>
+                                <button class="btn btn-custom" onclick="nextDua()" id="btn-next-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Next <i class="fa fa-chevron-left"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -455,28 +856,42 @@
 
             <!-- Nimaz Tab -->
             <div class="tab-pane fade" id="nimaz" role="tabpanel">
-                <div class="content-section text-center">
-                    <div class="lang-control">
-                        <button class="lang-btn" data-lang="ar" onclick="setNimazLang('ar', this)">العربية</button>
-                        <button class="lang-btn active" data-lang="ur" onclick="setNimazLang('ur', this)">اردو</button>
-                        <button class="lang-btn" data-lang="en" onclick="setNimazLang('en', this)">English</button>
-                    </div>
-                    <div id="nimaz-container" class="nimaz-content container">
-                        <!-- Nimaz steps loaded by JS -->
+                <div class="gallery-container">
+                    <h2 class="mb-4" id="nimaz-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Nimaz Complete</h2>
+                    <div class="viewer-main-layout">
+                        <div class="side-controls">
+                            <div class="tools-panel" style="border-color: var(--color-secondary);">
+                                <button class="tool-btn" data-lang="ar" onclick="setNimazLang('ar', this)" style="font-size: 1.5rem;">عربی</button>
+                                <button class="tool-btn active" data-lang="ur" onclick="setNimazLang('ur', this)" style="font-size: 1.8rem;">اردو</button>
+                                <button class="tool-btn" data-lang="en" onclick="setNimazLang('en', this)" style="font-size: 1.5rem;">ENG</button>
+                            </div>
+                        </div>
+                        <div class="viewer-content-area">
+                            <div id="nimaz-container" class="nimaz-content container w-100">
+                                <!-- Nimaz steps loaded by JS -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Adhkar Tab -->
             <div class="tab-pane fade" id="adhkar" role="tabpanel">
-                <div class="content-section text-center">
-                    <div class="lang-control" id="adhkar-mode-control">
-                        <button class="lang-btn active" onclick="setAdhkarMode('both', this)">Morning & Evening</button>
-                        <button class="lang-btn" onclick="setAdhkarMode('morning', this)">Morning Only</button>
-                        <button class="lang-btn" onclick="setAdhkarMode('evening', this)">Evening Only</button>
-                    </div>
-                    <div id="adhkar-container" class="dua-content container">
-                        <!-- Adhkar content injected here -->
+                <div class="gallery-container">
+                    <h2 class="mb-4" id="adhkar-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Morning & Evening Adhkar</h2>
+                    <div class="viewer-main-layout">
+                        <div class="side-controls">
+                            <div class="tools-panel" id="adhkar-mode-control">
+                                <button class="tool-btn active" onclick="setAdhkarMode('both', this)" style="font-size: 1.2rem; line-height: 1.2;">Morn & Eve</button>
+                                <button class="tool-btn" onclick="setAdhkarMode('morning', this)" style="font-size: 1.2rem;">Morning</button>
+                                <button class="tool-btn" onclick="setAdhkarMode('evening', this)" style="font-size: 1.2rem;">Evening</button>
+                            </div>
+                        </div>
+                        <div class="viewer-content-area">
+                            <div id="adhkar-container" class="dua-content container w-100">
+                                <!-- Adhkar content injected here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -484,26 +899,117 @@
             <!-- Holy Quran Tab -->
             <div class="tab-pane fade" id="quran" role="tabpanel">
                 <div class="gallery-container">
-                    <h2 class="mb-4" id="quran-title" style="color: var(--color-secondary);">Holy Quran Viewer</h2>
-                    <div class="gallery-img-wrapper">
-                        <img id="quran-img" src="https://abidinstitute-eng.github.io/ReadingQuran/standard1-quran-3.jpg" alt="Holy Quran Page" class="gallery-img">
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center px-md-5 flex-wrap gap-3">
-                        <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran">
-                            <i class="fa fa-chevron-left"></i> Previous
-                        </button>
-
-                        <div class="page-jump-box">
-                            <span id="quran-page-label">Page</span>
-                            <input type="number" id="quran-page-input" value="3" min="3" max="625"
-                                   title="Type page number and press Enter"
-                                   class="page-input-field">
-                            <span class="page-total">/ 625</span>
+                    <h2 class="mb-4" id="quran-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Holy Quran Viewer</h2>
+                    <div class="viewer-main-layout">
+                        <div class="side-controls">
+                            <!-- Custom Quran Tools (Magnifier only for now, or pens) -->
+                            <div class="tools-panel">
+                                <div class="tool-btn" id="quran-magnifier-toggle" onclick="toggleQuranMagnifier(this)" title="Optical Glass">
+                                    <i class="fa fa-search-plus"></i>
+                                </div>
+                                <div class="tool-btn" onclick="window.print()" title="Print Page">
+                                    <i class="fa fa-print"></i>
+                                </div>
+                            </div>
                         </div>
 
-                        <button class="btn btn-custom" onclick="nextQuranPage()" id="btn-next-quran">
-                            Next <i class="fa fa-chevron-right"></i>
-                        </button>
+                        <div class="viewer-content-area">
+                            <div class="gallery-img-wrapper">
+                                <div class="canvas-container" id="quran-container">
+                                    <img id="quran-img" src="https://abidinstitute-eng.github.io/ReadingQuran/standard1-quran-3.jpg" alt="Holy Quran Page" class="gallery-img massive-img">
+                                    <div id="quran-magnifier-lens" class="magnifier"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-chevron-left"></i> Previous
+                                </button>
+
+                                <div class="page-jump-box" style="padding: 15px 40px; border-width: 4px;">
+                                    <span id="quran-page-label" style="font-size: 2.5rem;">Page</span>
+                                    <input type="number" id="quran-page-input" value="3" min="3" max="625"
+                                           class="page-input-field" style="font-size: 3rem; width: 120px;">
+                                    <span class="page-total" style="font-size: 2.5rem;">/ 625</span>
+                                </div>
+
+                                <button class="btn btn-custom" onclick="nextQuranPage()" id="btn-next-quran" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tajweed Quran Tab -->
+            <div class="tab-pane fade" id="tajweed" role="tabpanel">
+                <div class="gallery-container">
+                    <h2 class="mb-4" id="tajweed-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Tajweedh Quran (PDF)</h2>
+                    <div class="viewer-main-layout">
+                        <div class="side-controls">
+                            <div class="tools-panel juz-selection-panel" style="border-color: var(--color-secondary); max-height: 80vh; overflow-y: auto;">
+                                <!-- Juz buttons -->
+                                <button class="tool-btn active" onclick="loadTajweedJuz(1, this)" style="font-size: 1.2rem;">Juz 1</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(2, this)" style="font-size: 1.2rem;">Juz 2</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(3, this)" style="font-size: 1.2rem;">Juz 3</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(4, this)" style="font-size: 1.2rem;">Juz 4</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(5, this)" style="font-size: 1.2rem;">Juz 5</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(6, this)" style="font-size: 1.2rem;">Juz 6</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(7, this)" style="font-size: 1.2rem;">Juz 7</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(8, this)" style="font-size: 1.2rem;">Juz 8</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(9, this)" style="font-size: 1.2rem;">Juz 9</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(10, this)" style="font-size: 1.2rem;">Juz 10</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(11, this)" style="font-size: 1.2rem;">Juz 11</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(12, this)" style="font-size: 1.2rem;">Juz 12</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(13, this)" style="font-size: 1.2rem;">Juz 13</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(14, this)" style="font-size: 1.2rem;">Juz 14</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(15, this)" style="font-size: 1.2rem;">Juz 15</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(16, this)" style="font-size: 1.2rem;">Juz 16</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(17, this)" style="font-size: 1.2rem;">Juz 17</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(18, this)" style="font-size: 1.2rem;">Juz 18</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(19, this)" style="font-size: 1.2rem;">Juz 19</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(20, this)" style="font-size: 1.2rem;">Juz 20</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(21, this)" style="font-size: 1.2rem;">Juz 21</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(22, this)" style="font-size: 1.2rem;">Juz 22</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(23, this)" style="font-size: 1.2rem;">Juz 23</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(24, this)" style="font-size: 1.2rem;">Juz 24</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(25, this)" style="font-size: 1.2rem;">Juz 25</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(26, this)" style="font-size: 1.2rem;">Juz 26</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(27, this)" style="font-size: 1.2rem;">Juz 27</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(28, this)" style="font-size: 1.2rem;">Juz 28</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(29, this)" style="font-size: 1.2rem;">Juz 29</button>
+                                <button class="tool-btn" onclick="loadTajweedJuz(30, this)" style="font-size: 1.2rem;">Juz 30</button>
+                            </div>
+                        </div>
+
+                        <div class="viewer-content-area">
+                            <iframe id="tajweed-iframe" src="" style="width: 100%; height: 90vh; border: none; border-radius: 15px;"></iframe>
+
+                            <!-- Mobile-only PDF Link -->
+                            <div class="mt-3 d-lg-none w-100 text-center">
+                                <a id="tajweed-mobile-link" href="#" target="_blank" class="btn btn-outline-secondary w-100 py-3" style="font-size: 1.5rem; font-weight: bold; border-radius: 20px;">
+                                    <i class="fa fa-file-pdf-o"></i> Open PDF in New Tab
+                                </a>
+                                <p class="text-muted mt-2" style="font-size: 1rem;">Recommended for mobile devices</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="prevTajweedPage()" id="btn-prev-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-chevron-left"></i> Previous
+                                </button>
+
+                                <div class="page-jump-box" style="padding: 15px 40px; border-width: 4px;">
+                                    <span id="tajweed-page-label" style="font-size: 2.5rem;">Page</span>
+                                    <input type="number" id="tajweed-page-input" value="1" min="1"
+                                           class="page-input-field" style="font-size: 3rem; width: 120px;">
+                                </div>
+
+                                <button class="btn btn-custom" onclick="nextTajweedPage()" id="btn-next-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -529,58 +1035,81 @@
     <script src="js/zoom.js"></script>
     <script src="js/main.js"></script>
     <script>
+        // --- Configuration & Remote Storage ---
+        // OPTION 1: Local Storage (Set to 'TAJWEEDH QURAN/')
+        // OPTION 2: Cloudflare (Set to your Cloudflare URL, e.g., 'https://your-bucket.pages.dev/TAJWEEDH%20QURAN/')
+        const TAJWEED_BASE_URL = 'TAJWEEDH QURAN/';
+
         // --- Shared Logic ---
         const pageTranslations = {
             ar: {
                 title: "الدروس الإسلامية الأساسية",
                 back: "العودة للرئيسية",
                 qaidaTab: "القاعدة النورانية",
-                duaTab: "50 دعاء مسنون",
+                duaTab: "50+ دعاء مسنون",
                 nimazTab: "تعليم الصلاة",
                 adhkarTab: "أذكار الصباح والمساء",
                 quranTab: "القرآن الكريم",
+                tajweedTab: "المصحف المجود",
                 qaidaTitle: "مشاهدة القاعدة النورانية",
+                duaTitle: "مشاهدة 50+ دعاء مسنون",
+                nimazTitle: "تعليم الصلاة الكامل",
+                adhkarTitle: "مشاهدة أذكار الصباح والمساء",
                 quranTitle: "مشاهدة القرآن الكريم",
+                tajweedTitle: "المصحف المجود (PDF)",
                 page: "صفحة",
                 prev: "السابق",
                 next: "التالي",
                 dir: "rtl",
                 adhkarModes: {both: "الصباح والمساء", morning: "الصباح فقط", evening: "المساء فقط"},
-                times: "مرات"
+                times: "مرات",
+                openPdf: "فتح ملف PDF في نافذة جديدة"
             },
             ur: {
                 title: "بنیادی اسلامی اسباق",
                 back: "ہوم پیج پر واپس جائیں",
                 qaidaTab: "نورانی قاعدہ",
-                duaTab: "50 مسنون دعائیں",
+                duaTab: "50+ مسنون دعائیں",
                 nimazTab: "مکمل نماز",
                 adhkarTab: "صبح و شام کے اذکار",
                 quranTab: "قرآن مجید",
+                tajweedTab: "تجویدی قرآن",
                 qaidaTitle: "نورانی قاعدہ ویور",
+                duaTitle: "50+ مسنون دعائیں ویور",
+                nimazTitle: "مکمل نماز سیکھیں",
+                adhkarTitle: "صبح و شام کے اذکار ویور",
                 quranTitle: "قرآن مجید ویور",
+                tajweedTitle: "تجویدی قرآن (PDF)",
                 page: "صفحہ",
                 prev: "پچھلا",
                 next: "اگلا",
                 dir: "rtl",
                 adhkarModes: {both: "صبح و شام", morning: "صرف صبح", evening: "صرف شام"},
-                times: "بار"
+                times: "بار",
+                openPdf: "پی ڈی ایف نئے ٹیب میں کھولیں"
             },
             en: {
                 title: "Basic Islamic Lessons",
                 back: "BACK TO HOME",
                 qaidaTab: "NOORANI QAEEDHA",
-                duaTab: "50 MASNOON DUAS",
+                duaTab: "50+ MASNOON DUAS",
                 nimazTab: "NIMAZ COMPLETE",
                 adhkarTab: "MORNING & EVENING ADHKAR",
                 quranTab: "HOLY QURAN",
+                tajweedTab: "TAJWEEDH QURAN",
                 qaidaTitle: "Noorani Qaida Viewer",
+                duaTitle: "50+ Masnoon Dua Viewer",
+                nimazTitle: "Nimaz Complete Viewer",
+                adhkarTitle: "Morning & Evening Adhkar Viewer",
                 quranTitle: "Holy Quran Viewer",
+                tajweedTitle: "Tajweedh Quran (PDF)",
                 page: "Page",
                 prev: "Previous",
                 next: "Next",
                 dir: "ltr",
                 adhkarModes: {both: "Morning & Evening", morning: "Morning Only", evening: "Evening Only"},
-                times: "Times"
+                times: "Times",
+                openPdf: "Open PDF in New Tab"
             }
         };
 
@@ -601,8 +1130,13 @@
             document.getElementById('nimaz-tab').innerText = data.nimazTab;
             document.getElementById('adhkar-tab').innerText = data.adhkarTab;
             document.getElementById('quran-tab').innerText = data.quranTab;
+            document.getElementById('tajweed-tab').innerText = data.tajweedTab;
             document.getElementById('qaida-title').innerText = data.qaidaTitle;
+            document.getElementById('dua-title').innerText = data.duaTitle;
+            document.getElementById('nimaz-title').innerText = data.nimazTitle;
+            document.getElementById('adhkar-title').innerText = data.adhkarTitle;
             document.getElementById('quran-title').innerText = data.quranTitle;
+            document.getElementById('tajweed-title').innerText = data.tajweedTitle;
 
             // Update Adhkar Filter Buttons
             const modeBtns = document.querySelectorAll('#adhkar-mode-control .lang-btn');
@@ -623,13 +1157,18 @@
             });
 
             // Update sub-tabs language
-            const duaLangBtn = document.querySelector(`#dua .lang-btn[data-lang="${lang}"]`);
+            const duaLangBtn = document.querySelector(`#dua .tool-btn[data-lang="${lang}"]`);
             if(duaLangBtn) setDuaLang(lang, duaLangBtn);
 
-            const nimazLangBtn = document.querySelector(`#nimaz .lang-btn[data-lang="${lang}"]`);
+            const nimazLangBtn = document.querySelector(`#nimaz .tool-btn[data-lang="${lang}"]`);
             if(nimazLangBtn) setNimazLang(lang, nimazLangBtn);
 
+            const qaidaLangBtn = document.getElementById(`qaida-lang-${lang === 'ar' ? 'ur' : lang}`);
+            if(qaidaLangBtn) setQaidaLang(lang === 'ar' ? 'ur' : lang, qaidaLangBtn);
+
             updateGallery(false);
+            updateQuranGallery(false);
+            updateTajweedGallery(false);
             renderAdhkar(); // Re-render to update "Times" text
             localStorage.setItem('preferredLang', lang);
         }
@@ -651,24 +1190,204 @@
 
         // --- Noorani Qaida Logic ---
         let currentPage = 1;
-        const totalPages = 31;
+        let currentQaidaLang = 'ur';
+        const qaidaConfigs = {
+            ur: {
+                path: 'NOORAI QEEDHA/',
+                prefix: 'noorani_qaida_page-',
+                total: 31
+            },
+            en: {
+                path: 'ENGLISH NOORANI QAEEDAHA/',
+                prefix: 'NOORANI QAEEDHA_page-',
+                total: 33
+            }
+        };
         const imgElement = document.getElementById('qaida-img');
 
-        function updateGallery(scroll = true) {
-            const pageNum = String(currentPage).padStart(4, '0');
-            imgElement.src = `NOORAI QEEDHA/noorani_qaida_page-${pageNum}.jpg`;
-            const data = pageTranslations[currentLang];
+        function setQaidaLang(lang, btn) {
+            currentQaidaLang = lang;
+            document.querySelectorAll('#qaida .lang-control .lang-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
 
+            currentPage = 1; // Reset to page 1 when language changes
+            updateGallery(false);
+        }
+
+        // --- Drawing & Magnifier Logic ---
+        const canvas = document.getElementById('drawing-canvas');
+        const ctx = canvas.getContext('2d');
+        const magnifierLens = document.getElementById('magnifier-lens');
+        let isDrawing = false;
+        let currentTool = 'pen';
+        let currentColor = '#ff4444';
+        let isMagnifierActive = false;
+
+        function initCanvas() {
+            const img = document.getElementById('qaida-img');
+            canvas.width = img.clientWidth;
+            canvas.height = img.clientHeight;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 3;
+        }
+
+        window.addEventListener('resize', initCanvas);
+        document.getElementById('qaida-img').onload = initCanvas;
+
+        function setTool(tool, color, btn) {
+            currentTool = tool;
+            if (color) currentColor = color === 'red' ? '#ff4444' : (color === 'green' ? '#00c851' : '#33b5e5');
+
+            document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if (isMagnifierActive) toggleMagnifier(document.getElementById('magnifier-toggle'));
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function startDrawing(e) {
+            if (isMagnifierActive) return;
+            isDrawing = true;
+            draw(e);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
+            ctx.strokeStyle = currentColor;
+            ctx.lineWidth = currentTool === 'eraser' ? 20 : 3;
+
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e); }, {passive: false});
+        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); }, {passive: false});
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // Magnifier Logic
+        function toggleMagnifier(btn) {
+            isMagnifierActive = !isMagnifierActive;
+            btn.classList.toggle('active');
+            magnifierLens.style.display = isMagnifierActive ? 'block' : 'none';
+            canvas.style.cursor = isMagnifierActive ? 'none' : 'crosshair';
+
+            if (isMagnifierActive) {
+                const img = document.getElementById('qaida-img');
+                magnifierLens.style.backgroundImage = `url('${img.src}')`;
+            }
+        }
+
+        // Holy Quran Magnifier
+        let isQuranMagnifierActive = false;
+        const quranMagnifierLens = document.getElementById('quran-magnifier-lens');
+        const quranImg = document.getElementById('quran-img');
+
+        function toggleQuranMagnifier(btn) {
+            isQuranMagnifierActive = !isQuranMagnifierActive;
+            btn.classList.toggle('active');
+            quranMagnifierLens.style.display = isQuranMagnifierActive ? 'block' : 'none';
+            quranImg.style.cursor = isQuranMagnifierActive ? 'none' : 'default';
+
+            if (isQuranMagnifierActive) {
+                quranMagnifierLens.style.backgroundImage = `url('${quranImg.src}')`;
+            }
+        }
+
+        function moveQuranMagnifier(e) {
+            if (!isQuranMagnifierActive) return;
+
+            const rect = quranImg.getBoundingClientRect();
+            let x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            let y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+            const zoom = 2;
+            const w = quranMagnifierLens.offsetWidth / 2;
+            const h = quranMagnifierLens.offsetHeight / 2;
+
+            quranMagnifierLens.style.left = (x - w) + 'px';
+            quranMagnifierLens.style.top = (y - h) + 'px';
+            quranMagnifierLens.style.backgroundPosition = `-${(x * zoom) - w}px -${(y * zoom) - h}px`;
+            quranMagnifierLens.style.backgroundSize = `${quranImg.width * zoom}px ${quranImg.height * zoom}px`;
+        }
+
+        const quranContainer = document.getElementById('quran-container');
+        quranContainer.addEventListener('mousemove', moveQuranMagnifier);
+        quranContainer.addEventListener('touchmove', (e) => { if(isQuranMagnifierActive) moveQuranMagnifier(e); }, {passive: false});
+
+        function moveMagnifier(e) {
+            if (!isMagnifierActive) return;
+
+            const img = document.getElementById('qaida-img');
+            const rect = img.getBoundingClientRect();
+            let x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            let y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+            const zoom = 2; // Zoom level
+            const w = magnifierLens.offsetWidth / 2;
+            const h = magnifierLens.offsetHeight / 2;
+
+            magnifierLens.style.left = (x - w) + 'px';
+            magnifierLens.style.top = (y - h) + 'px';
+            magnifierLens.style.backgroundPosition = `-${(x * zoom) - w}px -${(y * zoom) - h}px`;
+            magnifierLens.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
+        }
+
+        canvas.addEventListener('mousemove', moveMagnifier);
+        canvas.addEventListener('touchmove', (e) => { if(isMagnifierActive) moveMagnifier(e); }, {passive: false});
+
+        function updateGallery(scroll = true) {
+            const config = qaidaConfigs[currentQaidaLang];
+            const pageNum = String(currentPage).padStart(4, '0');
+            const newSrc = `${config.path}${config.prefix}${pageNum}.jpg`;
+            imgElement.src = newSrc;
+
+            // Sync magnifier image
+            if (isMagnifierActive) magnifierLens.style.backgroundImage = `url('${newSrc}')`;
+            // Clear canvas on page change
+            clearCanvas();
+
+            const data = pageTranslations[currentLang];
             const pageInput = document.getElementById('page-input');
             const pageTextLabel = document.getElementById('page-text-label');
+            const pageTotalDisplay = document.querySelector('#qaida .page-total');
+
             if (pageTextLabel) pageTextLabel.innerText = data.page;
-            if (pageInput) pageInput.value = currentPage;
+            if (pageInput) {
+                pageInput.value = currentPage;
+                pageInput.max = config.total;
+            }
+            if (pageTotalDisplay) pageTotalDisplay.innerText = `/ ${config.total}`;
 
             updateNavButtons(currentLang, 'qaida');
             if(scroll) document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function nextPage() { if (currentPage < totalPages) { currentPage++; updateGallery(); } }
+        function nextPage() {
+            const config = qaidaConfigs[currentQaidaLang];
+            if (currentPage < config.total) { currentPage++; updateGallery(); }
+        }
         function prevPage() { if (currentPage > 1) { currentPage--; updateGallery(); } }
 
         // --- Holy Quran Logic ---
@@ -691,6 +1410,50 @@
 
         function nextQuranPage() { if (currentQuranPage < totalQuranPages) { currentQuranPage++; updateQuranGallery(); } }
         function prevQuranPage() { if (currentQuranPage > 3) { currentQuranPage--; updateQuranGallery(); } }
+
+        // --- Tajweed Quran Logic ---
+        let currentTajweedJuzNum = 1;
+        let currentTajweedPage = 1;
+
+        function updateTajweedGallery(scroll = true) {
+            const iframe = document.getElementById('tajweed-iframe');
+            const juzStr = currentTajweedJuzNum.toString().padStart(2, '0');
+
+            // Build the URL using the base configuration
+            const fileName = `Colour Coded Quran Juz ${juzStr}.pdf`;
+            const pdfUrl = TAJWEED_BASE_URL + fileName;
+
+            iframe.src = `${pdfUrl}#page=${currentTajweedPage}`;
+
+            // Update mobile link
+            const mobileLink = document.getElementById('tajweed-mobile-link');
+            if (mobileLink) mobileLink.href = `${pdfUrl}#page=${currentTajweedPage}`;
+
+            const data = pageTranslations[currentLang];
+            const pageInput = document.getElementById('tajweed-page-input');
+            const pageTextLabel = document.getElementById('tajweed-page-label');
+
+            if (pageTextLabel) pageTextLabel.innerText = data.page;
+            if (pageInput) pageInput.value = currentTajweedPage;
+            if (mobileLink) mobileLink.innerText = data.openPdf || "Open PDF";
+
+            updateNavButtons(currentLang, 'tajweed');
+            if(scroll) document.querySelector('#tajweed .gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function loadTajweedJuz(juzNum, btn) {
+            currentTajweedJuzNum = juzNum;
+            currentTajweedPage = 1;
+
+            // Handle active state
+            document.querySelectorAll('#tajweed .tool-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateTajweedGallery();
+        }
+
+        function nextTajweedPage() { currentTajweedPage++; updateTajweedGallery(); }
+        function prevTajweedPage() { if (currentTajweedPage > 1) { currentTajweedPage--; updateTajweedGallery(); } }
 
         // --- Dua Logic ---
         let currentDuaIndex = 0;
@@ -773,7 +1536,7 @@
 
         function setDuaLang(lang, btn) {
             currentDuaLang = lang;
-            document.querySelectorAll('#dua .lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#dua .tool-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             // Update direction
@@ -816,7 +1579,7 @@
 
         function setNimazLang(lang, btn) {
             currentNimazLang = lang;
-            document.querySelectorAll('#nimaz .lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#nimaz .tool-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const container = document.getElementById('nimaz-container');
@@ -885,9 +1648,14 @@
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('preferredLang') || 'ur';
+            const savedLang = localStorage.getItem('preferredLang') || 'ar';
             setPageLanguage(savedLang);
             renderAdhkar();
+
+            // Listen for global language changes
+            window.addEventListener('languageChanged', (e) => {
+                setPageLanguage(e.detail);
+            });
 
             // Add Enter key listener for page jumping
             const pageInput = document.getElementById('page-input');
@@ -895,11 +1663,28 @@
                 pageInput.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter') {
                         let newPage = parseInt(this.value);
-                        if (!isNaN(newPage) && newPage >= 1 && newPage <= totalPages) {
+                        const config = qaidaConfigs[currentQaidaLang];
+                        if (!isNaN(newPage) && newPage >= 1 && newPage <= config.total) {
                             currentPage = newPage;
                             updateGallery();
                         } else {
                             this.value = currentPage;
+                        }
+                    }
+                });
+            }
+
+            // Add Enter key listener for Tajweed page jumping
+            const tajweedPageInput = document.getElementById('tajweed-page-input');
+            if (tajweedPageInput) {
+                tajweedPageInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        let newPage = parseInt(this.value);
+                        if (!isNaN(newPage) && newPage >= 1) {
+                            currentTajweedPage = newPage;
+                            updateTajweedGallery();
+                        } else {
+                            this.value = currentTajweedPage;
                         }
                     }
                 });
@@ -920,17 +1705,6 @@
                     }
                 });
             }
-
-            // Security Restrictions
-            document.addEventListener('contextmenu', event => event.preventDefault());
-            document.onkeydown = function (e) {
-                if (e.keyCode == 123) return false;
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-                if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
-                if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-            };
-            setInterval(() => { console.clear(); }, 500);
         });
     </script>
 </body>

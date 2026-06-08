@@ -537,3 +537,15 @@ section .section-heading {
   transform: scale(1.1);
   background: var(--color-secondary);
 }
+
+/* Mobile Padding for Android/Mobile Views */
+@media (max-width: 768px) {
+  body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
