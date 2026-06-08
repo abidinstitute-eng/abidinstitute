@@ -104,14 +104,14 @@
 
         @media (max-width: 1600px) {
             .nav-tabs .nav-link {
-                font-size: 6rem;
-                padding: 40px 80px;
-                min-width: 350px;
+                font-size: 16px;
+                padding: 15px 30px;
+                min-width: 140px;
             }
-            .text-arabic { font-size: 8rem; }
-            .text-translation { font-size: 5rem; }
-            .step-title { font-size: 6rem; }
-            .tool-btn { width: 120px; height: 120px; font-size: 4rem; }
+            .text-arabic { font-size: 4rem; }
+            .text-translation { font-size: 2.5rem; }
+            .step-title { font-size: 3rem; }
+            .tool-btn { width: 45px; height: 45px; font-size: 14px; }
         }
 
         @media (max-width: 1400px) {
@@ -132,47 +132,47 @@
                 justify-content: center;
             }
             .nav-tabs .nav-link {
-                font-size: 4rem;
-                padding: 30px 60px;
-                min-width: 300px;
+                font-size: 16px;
+                padding: 12px 25px;
+                min-width: 120px;
             }
-            .text-arabic { font-size: 6rem; }
-            .text-translation { font-size: 4rem; }
-            .step-title { font-size: 4rem; }
+            .text-arabic { font-size: 3.5rem; }
+            .text-translation { font-size: 2rem; }
+            .step-title { font-size: 2.5rem; }
         }
 
         @media (max-width: 1100px) {
-            .text-arabic { font-size: 5rem; }
-            .text-translation { font-size: 3.5rem; }
-            .step-title { font-size: 3rem; }
-            .tool-btn { width: 90px; height: 90px; font-size: 3rem; }
+            .text-arabic { font-size: 3rem; }
+            .text-translation { font-size: 1.8rem; }
+            .step-title { font-size: 2rem; }
+            .tool-btn { width: 40px; height: 40px; font-size: 14px; }
         }
 
-        /* Tools Panel Scaling - HUGE */
+        /* Tools Panel Scaling */
         .tools-panel {
             background: white;
-            padding: 25px;
-            border-radius: 40px;
+            padding: 15px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            box-shadow: 0 12px 45px rgba(0,0,0,0.12);
-            border: 8px solid var(--color-primary);
+            gap: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 4px solid var(--color-primary);
         }
         .tool-btn {
-            width: 160px;
-            height: 160px;
-            border-radius: 35px;
-            border: 6px solid #f0f0f0;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            border: 2px solid #f0f0f0;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-size: 5.5rem;
+            transition: all 0.3s ease;
+            font-size: 16px;
             background: #fff;
             color: var(--color-secondary);
-            font-weight: 900;
+            font-weight: 600;
         }
         .tool-btn:hover {
             transform: scale(1.1) rotate(3deg);
@@ -250,7 +250,7 @@
 
         .gallery-img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 150vh;
             height: auto;
             border: 1px solid #eee;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -268,13 +268,14 @@
             background-color: var(--color-primary);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 10px 20px;
             border-radius: 30px;
             font-weight: 600;
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            min-width: 140px;
+            min-width: 120px;
+            font-size: 16px;
         }
         .btn-custom:hover {
             background-color: #a08328;
@@ -294,10 +295,15 @@
         .nav-tabs .nav-link {
             border: none;
             color: #444;
-            font-weight: 950;
-            padding: 60px 120px;
+            font-weight: 700;
+            padding: 15px 30px;
             border-radius: 50px;
             background: #ffffff;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 16px;
+            min-width: 140px;
+        }
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-size: 9rem;
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
@@ -801,19 +807,19 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
-                                <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida">
                                     <i class="fa fa-chevron-left"></i> Previous
                                 </button>
 
-                                <div class="page-jump-box" style="padding: 15px 40px; border-width: 4px;">
-                                    <span id="page-text-label" style="font-size: 2.5rem;">Page</span>
+                                <div class="page-jump-box">
+                                    <span id="page-text-label">Page</span>
                                     <input type="number" id="page-input" value="1" min="1" max="31"
                                            title="Type page number and press Enter"
-                                           class="page-input-field" style="font-size: 3rem; width: 100px;">
-                                    <span class="page-total" style="font-size: 2.5rem;">/ 31</span>
+                                           class="page-input-field" style="width: 80px;">
+                                    <span class="page-total">/ 31</span>
                                 </div>
 
-                                <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida">
                                     Next <i class="fa fa-chevron-right"></i>
                                 </button>
                             </div>
@@ -902,13 +908,25 @@
                     <h2 class="mb-4" id="quran-title" style="color: var(--color-secondary); font-size: 4rem; font-weight: 800;">Holy Quran Viewer</h2>
                     <div class="viewer-main-layout">
                         <div class="side-controls">
-                            <!-- Custom Quran Tools (Magnifier only for now, or pens) -->
+                            <!-- Custom Quran Tools -->
                             <div class="tools-panel">
+                                <div class="tool-btn active" onclick="setTool('pen', 'red', this)" title="Red Pen">
+                                    <i class="fa fa-pencil color-red"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('pen', 'green', this)" title="Green Pen">
+                                    <i class="fa fa-pencil color-green"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('pen', 'blue', this)" title="Blue Pen">
+                                    <i class="fa fa-pencil color-blue"></i>
+                                </div>
+                                <div class="tool-btn" onclick="setTool('eraser', null, this)" title="Eraser">
+                                    <i class="fa fa-eraser"></i>
+                                </div>
+                                <div class="tool-btn" onclick="clearCanvas()" title="Clear All">
+                                    <i class="fa fa-trash"></i>
+                                </div>
                                 <div class="tool-btn" id="quran-magnifier-toggle" onclick="toggleQuranMagnifier(this)" title="Optical Glass">
                                     <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="tool-btn" onclick="window.print()" title="Print Page">
-                                    <i class="fa fa-print"></i>
                                 </div>
                             </div>
                         </div>
@@ -917,23 +935,24 @@
                             <div class="gallery-img-wrapper">
                                 <div class="canvas-container" id="quran-container">
                                     <img id="quran-img" src="https://abidinstitute-eng.github.io/ReadingQuran/standard1-quran-3.jpg" alt="Holy Quran Page" class="gallery-img massive-img">
+                                    <canvas id="quran-drawing-canvas"></canvas>
                                     <div id="quran-magnifier-lens" class="magnifier"></div>
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
-                                <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran">
                                     <i class="fa fa-chevron-left"></i> Previous
                                 </button>
 
-                                <div class="page-jump-box" style="padding: 15px 40px; border-width: 4px;">
-                                    <span id="quran-page-label" style="font-size: 2.5rem;">Page</span>
+                                <div class="page-jump-box">
+                                    <span id="quran-page-label">Page</span>
                                     <input type="number" id="quran-page-input" value="3" min="3" max="625"
-                                           class="page-input-field" style="font-size: 3rem; width: 120px;">
-                                    <span class="page-total" style="font-size: 2.5rem;">/ 625</span>
+                                           class="page-input-field" style="width: 80px;">
+                                    <span class="page-total">/ 625</span>
                                 </div>
 
-                                <button class="btn btn-custom" onclick="nextQuranPage()" id="btn-next-quran" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                <button class="btn btn-custom" onclick="nextQuranPage()" id="btn-next-quran">
                                     Next <i class="fa fa-chevron-right"></i>
                                 </button>
                             </div>
@@ -1216,12 +1235,20 @@
 
         // --- Drawing & Magnifier Logic ---
         const canvas = document.getElementById('drawing-canvas');
+        const quranCanvas = document.getElementById('quran-drawing-canvas');
+        let activeCanvas = canvas;
         const ctx = canvas.getContext('2d');
+        const quranCtx = quranCanvas.getContext('2d');
+        let activeCtx = ctx;
+
         const magnifierLens = document.getElementById('magnifier-lens');
+        const quranMagnifierLens = document.getElementById('quran-magnifier-lens');
+
         let isDrawing = false;
         let currentTool = 'pen';
         let currentColor = '#ff4444';
         let isMagnifierActive = false;
+        let isQuranMagnifierActive = false;
 
         function initCanvas() {
             const img = document.getElementById('qaida-img');
@@ -1230,61 +1257,82 @@
             ctx.lineJoin = 'round';
             ctx.lineCap = 'round';
             ctx.lineWidth = 3;
+
+            const qImg = document.getElementById('quran-img');
+            quranCanvas.width = qImg.clientWidth;
+            quranCanvas.height = qImg.clientHeight;
+            quranCtx.lineJoin = 'round';
+            quranCtx.lineCap = 'round';
+            quranCtx.lineWidth = 3;
         }
 
         window.addEventListener('resize', initCanvas);
         document.getElementById('qaida-img').onload = initCanvas;
+        document.getElementById('quran-img').onload = initCanvas;
 
         function setTool(tool, color, btn) {
             currentTool = tool;
             if (color) currentColor = color === 'red' ? '#ff4444' : (color === 'green' ? '#00c851' : '#33b5e5');
 
+            // Find context based on which tab we are in
+            const activeTab = document.querySelector('.tab-pane.active').id;
+            if (activeTab === 'qaida') {
+                activeCanvas = canvas;
+                activeCtx = ctx;
+            } else if (activeTab === 'quran') {
+                activeCanvas = quranCanvas;
+                activeCtx = quranCtx;
+            }
+
             document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            if (isMagnifierActive) toggleMagnifier(document.getElementById('magnifier-toggle'));
+            if (isMagnifierActive && activeTab === 'qaida') toggleMagnifier(document.getElementById('magnifier-toggle'));
+            if (isQuranMagnifierActive && activeTab === 'quran') toggleQuranMagnifier(document.getElementById('quran-magnifier-toggle'));
         }
 
         function clearCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            activeCtx.clearRect(0, 0, activeCanvas.width, activeCanvas.height);
         }
 
         function startDrawing(e) {
-            if (isMagnifierActive) return;
+            if (isMagnifierActive || isQuranMagnifierActive) return;
             isDrawing = true;
             draw(e);
         }
 
         function stopDrawing() {
             isDrawing = false;
-            ctx.beginPath();
+            activeCtx.beginPath();
         }
 
         function draw(e) {
             if (!isDrawing) return;
 
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+            const rect = activeCanvas.getBoundingClientRect();
+            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
 
-            ctx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
-            ctx.strokeStyle = currentColor;
-            ctx.lineWidth = currentTool === 'eraser' ? 20 : 3;
+            activeCtx.globalCompositeOperation = currentTool === 'eraser' ? 'destination-out' : 'source-over';
+            activeCtx.strokeStyle = currentColor;
+            activeCtx.lineWidth = currentTool === 'eraser' ? 20 : 3;
 
-            ctx.lineTo(x, y);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(x, y);
+            activeCtx.lineTo(x, y);
+            activeCtx.stroke();
+            activeCtx.beginPath();
+            activeCtx.moveTo(x, y);
         }
 
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseout', stopDrawing);
+        [canvas, quranCanvas].forEach(c => {
+            c.addEventListener('mousedown', startDrawing);
+            c.addEventListener('mousemove', draw);
+            c.addEventListener('mouseup', stopDrawing);
+            c.addEventListener('mouseout', stopDrawing);
 
-        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e); }, {passive: false});
-        canvas.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); }, {passive: false});
-        canvas.addEventListener('touchend', stopDrawing);
+            c.addEventListener('touchstart', (e) => { e.preventDefault(); startDrawing(e); }, {passive: false});
+            c.addEventListener('touchmove', (e) => { e.preventDefault(); draw(e); }, {passive: false});
+            c.addEventListener('touchend', stopDrawing);
+        });
 
         // Magnifier Logic
         function toggleMagnifier(btn) {
@@ -1300,15 +1348,13 @@
         }
 
         // Holy Quran Magnifier
-        let isQuranMagnifierActive = false;
-        const quranMagnifierLens = document.getElementById('quran-magnifier-lens');
         const quranImg = document.getElementById('quran-img');
 
         function toggleQuranMagnifier(btn) {
             isQuranMagnifierActive = !isQuranMagnifierActive;
             btn.classList.toggle('active');
             quranMagnifierLens.style.display = isQuranMagnifierActive ? 'block' : 'none';
-            quranImg.style.cursor = isQuranMagnifierActive ? 'none' : 'default';
+            quranCanvas.style.cursor = isQuranMagnifierActive ? 'none' : 'crosshair';
 
             if (isQuranMagnifierActive) {
                 quranMagnifierLens.style.backgroundImage = `url('${quranImg.src}')`;
@@ -1333,8 +1379,12 @@
         }
 
         const quranContainer = document.getElementById('quran-container');
-        quranContainer.addEventListener('mousemove', moveQuranMagnifier);
-        quranContainer.addEventListener('touchmove', (e) => { if(isQuranMagnifierActive) moveQuranMagnifier(e); }, {passive: false});
+        quranContainer.addEventListener('mousemove', (e) => {
+            if (isQuranMagnifierActive) moveQuranMagnifier(e);
+        });
+        quranContainer.addEventListener('touchmove', (e) => {
+            if (isQuranMagnifierActive) moveQuranMagnifier(e);
+        }, {passive: false});
 
         function moveMagnifier(e) {
             if (!isMagnifierActive) return;
@@ -1355,6 +1405,7 @@
         }
 
         canvas.addEventListener('mousemove', moveMagnifier);
+        quranCanvas.addEventListener('mousemove', moveMagnifier); // This handles both via the logic inside moveMagnifier if needed or separate
         canvas.addEventListener('touchmove', (e) => { if(isMagnifierActive) moveMagnifier(e); }, {passive: false});
 
         function updateGallery(scroll = true) {
