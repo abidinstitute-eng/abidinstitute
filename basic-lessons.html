@@ -807,6 +807,9 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="firstPage()" id="btn-first-qaida">
+                                    <i class="fa fa-angle-double-left"></i> First
+                                </button>
                                 <button class="btn btn-custom" onclick="prevPage()" id="btn-prev-qaida">
                                     <i class="fa fa-chevron-left"></i> Previous
                                 </button>
@@ -821,6 +824,9 @@
 
                                 <button class="btn btn-custom" onclick="nextPage()" id="btn-next-qaida">
                                     Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                                <button class="btn btn-custom" onclick="lastPage()" id="btn-last-qaida">
+                                    Last <i class="fa fa-angle-double-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -847,12 +853,18 @@
                             <div class="dua-wrapper" id="dua-display" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
                                 <!-- Dua content injected here -->
                             </div>
-                            <div class="d-flex justify-content-between align-items-center w-100 px-md-5 mt-5">
+                            <div class="d-flex justify-content-between align-items-center w-100 px-md-5 mt-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="firstDua()" id="btn-first-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-angle-double-right"></i> First
+                                </button>
                                 <button class="btn btn-custom" onclick="prevDua()" id="btn-prev-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
                                     <i class="fa fa-chevron-right"></i> Previous
                                 </button>
                                 <button class="btn btn-custom" onclick="nextDua()" id="btn-next-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
                                     Next <i class="fa fa-chevron-left"></i>
+                                </button>
+                                <button class="btn btn-custom" onclick="lastDua()" id="btn-last-dua" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Last <i class="fa fa-angle-double-left"></i>
                                 </button>
                             </div>
                         </div>
@@ -941,6 +953,9 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="firstQuranPage()" id="btn-first-quran">
+                                    <i class="fa fa-angle-double-left"></i> First
+                                </button>
                                 <button class="btn btn-custom" onclick="prevQuranPage()" id="btn-prev-quran">
                                     <i class="fa fa-chevron-left"></i> Previous
                                 </button>
@@ -954,6 +969,9 @@
 
                                 <button class="btn btn-custom" onclick="nextQuranPage()" id="btn-next-quran">
                                     Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                                <button class="btn btn-custom" onclick="lastQuranPage()" id="btn-last-quran">
+                                    Last <i class="fa fa-angle-double-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -1014,6 +1032,9 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center w-100 mt-4 px-md-5 flex-wrap gap-4">
+                                <button class="btn btn-custom" onclick="firstTajweedPage()" id="btn-first-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    <i class="fa fa-angle-double-left"></i> First
+                                </button>
                                 <button class="btn btn-custom" onclick="prevTajweedPage()" id="btn-prev-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
                                     <i class="fa fa-chevron-left"></i> Previous
                                 </button>
@@ -1026,6 +1047,9 @@
 
                                 <button class="btn btn-custom" onclick="nextTajweedPage()" id="btn-next-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
                                     Next <i class="fa fa-chevron-right"></i>
+                                </button>
+                                <button class="btn btn-custom" onclick="lastTajweedPage()" id="btn-last-tajweed" style="font-size: 2.5rem; padding: 20px 50px; border-radius: 50px;">
+                                    Last <i class="fa fa-angle-double-right"></i>
                                 </button>
                             </div>
                         </div>
@@ -1068,7 +1092,7 @@
                 duaTab: "50+ دعاء مسنون",
                 nimazTab: "تعليم الصلاة",
                 adhkarTab: "أذكار الصباح والمساء",
-                quranTab: "القرآن الكريم",
+                pageTitle: "القرآن الكريم",
                 tajweedTab: "المصحف المجود",
                 qaidaTitle: "مشاهدة القاعدة النورانية",
                 duaTitle: "مشاهدة 50+ دعاء مسنون",
@@ -1079,6 +1103,8 @@
                 page: "صفحة",
                 prev: "السابق",
                 next: "التالي",
+                first: "الأول",
+                last: "الأخير",
                 dir: "rtl",
                 adhkarModes: {both: "الصباح والمساء", morning: "الصباح فقط", evening: "المساء فقط"},
                 times: "مرات",
@@ -1102,6 +1128,8 @@
                 page: "صفحہ",
                 prev: "پچھلا",
                 next: "اگلا",
+                first: "پہلا",
+                last: "آخری",
                 dir: "rtl",
                 adhkarModes: {both: "صبح و شام", morning: "صرف صبح", evening: "صرف شام"},
                 times: "بار",
@@ -1125,6 +1153,8 @@
                 page: "Page",
                 prev: "Previous",
                 next: "Next",
+                first: "First",
+                last: "Last",
                 dir: "ltr",
                 adhkarModes: {both: "Morning & Evening", morning: "Morning Only", evening: "Evening Only"},
                 times: "Times",
@@ -1195,14 +1225,20 @@
         function updateNavButtons(lang, type) {
             const prevBtn = document.getElementById(`btn-prev-${type}`);
             const nextBtn = document.getElementById(`btn-next-${type}`);
+            const firstBtn = document.getElementById(`btn-first-${type}`);
+            const lastBtn = document.getElementById(`btn-last-${type}`);
             if(prevBtn && nextBtn) {
                 const data = pageTranslations[lang];
                 if(lang === 'en') {
+                    if(firstBtn) firstBtn.innerHTML = `<i class="fa fa-angle-double-left"></i> ${data.first}`;
                     prevBtn.innerHTML = `<i class="fa fa-chevron-left"></i> ${data.prev}`;
                     nextBtn.innerHTML = `${data.next} <i class="fa fa-chevron-right"></i>`;
+                    if(lastBtn) lastBtn.innerHTML = `${data.last} <i class="fa fa-angle-double-right"></i>`;
                 } else {
+                    if(firstBtn) firstBtn.innerHTML = `${data.first} <i class="fa fa-angle-double-right"></i>`;
                     prevBtn.innerHTML = `${data.prev} <i class="fa fa-chevron-right"></i>`;
                     nextBtn.innerHTML = `<i class="fa fa-chevron-left"></i> ${data.next}`;
+                    if(lastBtn) lastBtn.innerHTML = `<i class="fa fa-angle-double-left"></i> ${data.last}`;
                 }
             }
         }
@@ -1271,8 +1307,7 @@
         document.getElementById('quran-img').onload = initCanvas;
 
         function setTool(tool, color, btn) {
-            currentTool = tool;
-            if (color) currentColor = color === 'red' ? '#ff4444' : (color === 'green' ? '#00c851' : '#33b5e5');
+            const isActive = btn.classList.contains('active');
 
             // Find context based on which tab we are in
             const activeTab = document.querySelector('.tab-pane.active').id;
@@ -1284,19 +1319,32 @@
                 activeCtx = quranCtx;
             }
 
-            document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            // Deselect all tools in the same panel (prevents deselecting language buttons)
+            btn.parentElement.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
 
+            if (isActive) {
+                currentTool = null;
+                activeCanvas.style.cursor = 'default';
+                return;
+            }
+
+            currentTool = tool;
+            if (color) currentColor = color === 'red' ? '#ff4444' : (color === 'green' ? '#00c851' : '#33b5e5');
+
+            btn.classList.add('active');
+            activeCanvas.style.cursor = 'crosshair';
+
+            // If we selected a tool, turn off magnifier if it was active
             if (isMagnifierActive && activeTab === 'qaida') toggleMagnifier(document.getElementById('magnifier-toggle'));
             if (isQuranMagnifierActive && activeTab === 'quran') toggleQuranMagnifier(document.getElementById('quran-magnifier-toggle'));
         }
 
         function clearCanvas() {
-            activeCtx.clearRect(0, 0, activeCanvas.width, activeCanvas.height);
+            if (activeCtx) activeCtx.clearRect(0, 0, activeCanvas.width, activeCanvas.height);
         }
 
         function startDrawing(e) {
-            if (isMagnifierActive || isQuranMagnifierActive) return;
+            if (isMagnifierActive || isQuranMagnifierActive || !currentTool) return;
             isDrawing = true;
             draw(e);
         }
@@ -1337,14 +1385,21 @@
         // Magnifier Logic
         function toggleMagnifier(btn) {
             isMagnifierActive = !isMagnifierActive;
-            btn.classList.toggle('active');
-            magnifierLens.style.display = isMagnifierActive ? 'block' : 'none';
-            canvas.style.cursor = isMagnifierActive ? 'none' : 'crosshair';
 
             if (isMagnifierActive) {
+                // Deselect drawing tools in the same panel
+                btn.parentElement.querySelectorAll('.tool-btn').forEach(b => {
+                    if (b !== btn) b.classList.remove('active');
+                });
+                currentTool = null;
+
                 const img = document.getElementById('qaida-img');
                 magnifierLens.style.backgroundImage = `url('${img.src}')`;
             }
+
+            btn.classList.toggle('active', isMagnifierActive);
+            magnifierLens.style.display = isMagnifierActive ? 'block' : 'none';
+            canvas.style.cursor = isMagnifierActive ? 'none' : (currentTool ? 'crosshair' : 'default');
         }
 
         // Holy Quran Magnifier
@@ -1352,13 +1407,20 @@
 
         function toggleQuranMagnifier(btn) {
             isQuranMagnifierActive = !isQuranMagnifierActive;
-            btn.classList.toggle('active');
-            quranMagnifierLens.style.display = isQuranMagnifierActive ? 'block' : 'none';
-            quranCanvas.style.cursor = isQuranMagnifierActive ? 'none' : 'crosshair';
 
             if (isQuranMagnifierActive) {
+                // Deselect drawing tools in the same panel
+                btn.parentElement.querySelectorAll('.tool-btn').forEach(b => {
+                    if (b !== btn) b.classList.remove('active');
+                });
+                currentTool = null;
+
                 quranMagnifierLens.style.backgroundImage = `url('${quranImg.src}')`;
             }
+
+            btn.classList.toggle('active', isQuranMagnifierActive);
+            quranMagnifierLens.style.display = isQuranMagnifierActive ? 'block' : 'none';
+            quranCanvas.style.cursor = isQuranMagnifierActive ? 'none' : (currentTool ? 'crosshair' : 'default');
         }
 
         function moveQuranMagnifier(e) {
@@ -1431,6 +1493,15 @@
             }
             if (pageTotalDisplay) pageTotalDisplay.innerText = `/ ${config.total}`;
 
+            const firstBtn = document.getElementById('btn-first-qaida');
+            const prevBtn = document.getElementById('btn-prev-qaida');
+            const nextBtn = document.getElementById('btn-next-qaida');
+            const lastBtn = document.getElementById('btn-last-qaida');
+            if(firstBtn) firstBtn.disabled = currentPage === 1;
+            if(prevBtn) prevBtn.disabled = currentPage === 1;
+            if(nextBtn) nextBtn.disabled = currentPage === config.total;
+            if(lastBtn) lastBtn.disabled = currentPage === config.total;
+
             updateNavButtons(currentLang, 'qaida');
             if(scroll) document.querySelector('.gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -1440,6 +1511,11 @@
             if (currentPage < config.total) { currentPage++; updateGallery(); }
         }
         function prevPage() { if (currentPage > 1) { currentPage--; updateGallery(); } }
+        function firstPage() { if (currentPage !== 1) { currentPage = 1; updateGallery(); } }
+        function lastPage() {
+            const config = qaidaConfigs[currentQaidaLang];
+            if (currentPage !== config.total) { currentPage = config.total; updateGallery(); }
+        }
 
         // --- Holy Quran Logic ---
         let currentQuranPage = 3;
@@ -1455,12 +1531,23 @@
             if (pageTextLabel) pageTextLabel.innerText = data.page;
             if (pageInput) pageInput.value = currentQuranPage;
 
+            const firstBtn = document.getElementById('btn-first-quran');
+            const prevBtn = document.getElementById('btn-prev-quran');
+            const nextBtn = document.getElementById('btn-next-quran');
+            const lastBtn = document.getElementById('btn-last-quran');
+            if(firstBtn) firstBtn.disabled = currentQuranPage === 3;
+            if(prevBtn) prevBtn.disabled = currentQuranPage === 3;
+            if(nextBtn) nextBtn.disabled = currentQuranPage === totalQuranPages;
+            if(lastBtn) lastBtn.disabled = currentQuranPage === totalQuranPages;
+
             updateNavButtons(currentLang, 'quran');
             if(scroll) document.querySelector('#quran .gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function nextQuranPage() { if (currentQuranPage < totalQuranPages) { currentQuranPage++; updateQuranGallery(); } }
         function prevQuranPage() { if (currentQuranPage > 3) { currentQuranPage--; updateQuranGallery(); } }
+        function firstQuranPage() { if (currentQuranPage !== 3) { currentQuranPage = 3; updateQuranGallery(); } }
+        function lastQuranPage() { if (currentQuranPage !== totalQuranPages) { currentQuranPage = totalQuranPages; updateQuranGallery(); } }
 
         // --- Tajweed Quran Logic ---
         let currentTajweedJuzNum = 1;
@@ -1488,6 +1575,11 @@
             if (pageInput) pageInput.value = currentTajweedPage;
             if (mobileLink) mobileLink.innerText = data.openPdf || "Open PDF";
 
+            const firstBtn = document.getElementById('btn-first-tajweed');
+            const prevBtn = document.getElementById('btn-prev-tajweed');
+            if(firstBtn) firstBtn.disabled = currentTajweedPage === 1;
+            if(prevBtn) prevBtn.disabled = currentTajweedPage === 1;
+
             updateNavButtons(currentLang, 'tajweed');
             if(scroll) document.querySelector('#tajweed .gallery-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -1505,6 +1597,14 @@
 
         function nextTajweedPage() { currentTajweedPage++; updateTajweedGallery(); }
         function prevTajweedPage() { if (currentTajweedPage > 1) { currentTajweedPage--; updateTajweedGallery(); } }
+        function firstTajweedPage() { if (currentTajweedPage !== 1) { currentTajweedPage = 1; updateTajweedGallery(); } }
+        function lastTajweedPage() {
+            // We don't have a fixed total for all Tajweed PDFs as they are Juz-based.
+            // For now, jumping to a large number or just adding the function.
+            // Some PDFs might have 20-30 pages.
+            currentTajweedPage = 30; // Approximation or we can leave it for now
+            updateTajweedGallery();
+        }
 
         // --- Dua Logic ---
         let currentDuaIndex = 0;
@@ -1576,14 +1676,23 @@
 
             counter.innerText = `Dua ${currentDuaIndex + 1} / ${duas.length}`;
 
-            document.getElementById('btn-prev-dua').disabled = currentDuaIndex === 0;
-            document.getElementById('btn-next-dua').disabled = currentDuaIndex === duas.length - 1;
+            const firstBtn = document.getElementById('btn-first-dua');
+            const prevBtn = document.getElementById('btn-prev-dua');
+            const nextBtn = document.getElementById('btn-next-dua');
+            const lastBtn = document.getElementById('btn-last-dua');
+
+            if(firstBtn) firstBtn.disabled = currentDuaIndex === 0;
+            if(prevBtn) prevBtn.disabled = currentDuaIndex === 0;
+            if(nextBtn) nextBtn.disabled = currentDuaIndex === duas.length - 1;
+            if(lastBtn) lastBtn.disabled = currentDuaIndex === duas.length - 1;
 
             updateNavButtons(currentDuaLang, 'dua');
         }
 
         function nextDua() { if (currentDuaIndex < duas.length - 1) { currentDuaIndex++; renderDuas(); } }
         function prevDua() { if (currentDuaIndex > 0) { currentDuaIndex--; renderDuas(); } }
+        function firstDua() { if (currentDuaIndex !== 0) { currentDuaIndex = 0; renderDuas(); } }
+        function lastDua() { if (currentDuaIndex !== duas.length - 1) { currentDuaIndex = duas.length - 1; renderDuas(); } }
 
         function setDuaLang(lang, btn) {
             currentDuaLang = lang;
