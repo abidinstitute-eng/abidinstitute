@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const zoomDiv = document.createElement('div');
     zoomDiv.className = 'zoom-controls';
     zoomDiv.innerHTML = `
+        <button id="panel-toggle" class="zoom-btn active" onclick="toggleControlsPanel()" title="Toggle Color Panel">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
         <button class="zoom-btn" onclick="adjustZoom(1.1)" title="Zoom In">
             <i class="fa fa-search-plus"></i>
         </button>
@@ -48,4 +55,32 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
     `;
     document.body.appendChild(zoomDiv);
+});
+
+function toggleControlsPanel() {
+    const panels = document.querySelectorAll('.side-controls');
+    const toggleBtn = document.getElementById('panel-toggle');
+    const isVisible = toggleBtn.classList.contains('active');
+
+    if (isVisible) {
+        panels.forEach(panel => panel.classList.add('hidden-panel'));
+        toggleBtn.classList.remove('active');
+        localStorage.setItem('panelVisible', 'false');
+    } else {
+        panels.forEach(panel => panel.classList.remove('hidden-panel'));
+        toggleBtn.classList.add('active');
+        localStorage.setItem('panelVisible', 'true');
+    }
+}
+
+// Check saved state on load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedState = localStorage.getItem('panelVisible');
+    const panels = document.querySelectorAll('.side-controls');
+    const toggleBtn = document.getElementById('panel-toggle');
+
+    if (savedState === 'false' && toggleBtn) {
+        panels.forEach(panel => panel.classList.add('hidden-panel'));
+        toggleBtn.classList.remove('active');
+    }
 });
